@@ -13,7 +13,7 @@ const PORTFOLIO_DATA = {
         linkedin: "" // optional
     },
     resume: {
-        url: "assets/resume/Rohan_R_Resume.pdf" // place your PDF at this path
+        url: "rohan_resume.pdf" // points to PDF placed in project root
     },
     skills: {
         programming: ["Python", "C", "Java"],
