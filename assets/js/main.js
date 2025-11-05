@@ -149,7 +149,15 @@
         if (resumeUrl) {
             const resumeLink = document.getElementById('resume-link');
             const cta = document.getElementById('cta-resume');
-            resumeLink.href = resumeUrl; cta.href = resumeUrl;
+            const fileNameFromUrl = resumeUrl.split('/').pop() || 'resume.pdf';
+            if (resumeLink) {
+                resumeLink.href = resumeUrl;
+                resumeLink.setAttribute('download', fileNameFromUrl);
+            }
+            if (cta) {
+                cta.href = resumeUrl;
+                cta.setAttribute('download', fileNameFromUrl);
+            }
         }
 
         // hide header quick contacts (moved to footer)
