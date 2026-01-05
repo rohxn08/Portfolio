@@ -13,7 +13,7 @@ const PORTFOLIO_DATA = {
         linkedin: "" // optional
     },
     resume: {
-        url: "rohan_resume.pdf" // points to PDF placed in project root
+        url: "rohan resume.pdf" // points to PDF placed in project root
     },
     skills: {
         programming: ["Python", "C", "Java"],
@@ -21,6 +21,12 @@ const PORTFOLIO_DATA = {
         other: ["Data Structures", "Algorithms", "Machine Learning", "Deep Learning", "SQL", "DBMS"]
     },
     projects: [
+        {
+            title: "Face Anti-Spoofing System",
+            summary: "Biometric security system distinguishing real faces from spoofs using Hybrid AI (MobileNetV2 CNN + SVM) with real-time detection.",
+            tech: ["Python", "Streamlit", "TensorFlow", "OpenCV", "Scikit-Learn"],
+            link: ""
+        },
         {
             title: "Chatting Via Bluetooth",
             summary: "Web interface enabling real‑time Bluetooth communication between two devices.",
