@@ -25,7 +25,7 @@ const PORTFOLIO_DATA = {
             title: "Face Anti-Spoofing System",
             summary: "Biometric security system distinguishing real faces from spoofs using Hybrid AI (MobileNetV2 CNN + SVM) with real-time detection.",
             tech: ["Python", "Streamlit", "TensorFlow", "OpenCV", "Scikit-Learn"],
-            link: ""
+            link: "https://github.com/rohxn08/Face-anti-spoofing-system"
         },
         {
             title: "Chatting Via Bluetooth",
