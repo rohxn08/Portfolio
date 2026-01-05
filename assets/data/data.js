@@ -33,12 +33,7 @@ const PORTFOLIO_DATA = {
             tech: ["Python", "Sockets", "Flask", "HTML", "CSS", "JavaScript"],
             link: ""
         },
-        {
-            title: "Blood Bank Management System",
-            summary: "Manage transfusions, track inventory and donor eligibility with alerts.",
-            tech: ["MySQL", "PHP", "HTML", "CSS"],
-            link: ""
-        },
+
         {
             title: "Automatic Image Enhancer",
             summary: "Enhance images based on brightness and contrast using OpenCV.",
