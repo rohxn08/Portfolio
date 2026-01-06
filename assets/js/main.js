@@ -167,9 +167,10 @@
         const about = byId('about-text');
         if (d.aboutHtml) about.innerHTML = d.aboutHtml;
 
-        renderChips('skills-programming', d.skills.programming);
+        renderChips('skills-languages', d.skills.languages);
+        renderChips('skills-ai-ml', d.skills.ai_ml);
+        renderChips('skills-genai-nlp', d.skills.genai_nlp);
         renderChips('skills-tools', d.skills.tools);
-        renderChips('skills-other', d.skills.other);
         renderProjects();
         renderEducation();
         renderCerts();
