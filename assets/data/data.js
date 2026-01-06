@@ -31,7 +31,7 @@ const PORTFOLIO_DATA = {
             title: "Chatting Via Bluetooth",
             summary: "Web interface enabling real‑time Bluetooth communication between two devices.",
             tech: ["Python", "Sockets", "Flask", "HTML", "CSS", "JavaScript"],
-            link: ""
+            link: "https://github.com/rohxn08/Chatting-Via-Bluetooth"
         },
 
         {
