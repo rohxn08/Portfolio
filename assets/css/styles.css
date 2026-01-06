@@ -408,18 +408,17 @@ h2 {
     left: 0;
     width: 100%;
     padding: 24px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), transparent);
     z-index: 2;
-    transform: translateY(60%);
-    transition: transform 0.4s ease;
+    transform: translateY(0);
+    /* Always visible */
 }
 
-.card:hover .card-content {
-    transform: translateY(0);
-}
+/* Removed card:hover transform */
 
 .card:hover .card-image {
     transform: scale(1.05);
+    /* Keep image zoom */
 }
 
 .card h3 {
@@ -437,13 +436,11 @@ h2 {
     color: #ccc;
     line-height: 1.4;
     margin: 0 0 16px !important;
-    opacity: 0;
-    transition: opacity 0.3s ease 0.1s;
+    opacity: 1;
+    /* Always visible */
 }
 
-.card:hover .project-description {
-    opacity: 1;
-}
+/* Removed card:hover opacity trigger */
 
 .tags {
     display: flex;
