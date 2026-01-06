@@ -427,7 +427,8 @@ h2 {
     padding: 24px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7), transparent);
     z-index: 2;
-    transform: translateY(60%);
+    transform: translateY(calc(100% - 88px));
+    /* Shows title consistently */
     transition: transform 0.4s ease;
 }
 
