@@ -402,32 +402,25 @@ h2 {
     padding: 20px;
 }
 
+/* Card Hover Revert */
 .card-content {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 24px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7), transparent);
     z-index: 2;
-    transform: translateY(0);
-    /* Always visible */
+    transform: translateY(60%);
+    transition: transform 0.4s ease;
 }
 
-/* Removed card:hover transform */
+.card:hover .card-content {
+    transform: translateY(0);
+}
 
 .card:hover .card-image {
     transform: scale(1.05);
-    /* Keep image zoom */
-}
-
-.card h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text);
-    margin: 0 0 8px;
-    line-height: 1.2;
-    text-transform: uppercase;
 }
 
 .project-description {
@@ -436,11 +429,13 @@ h2 {
     color: #ccc;
     line-height: 1.4;
     margin: 0 0 16px !important;
-    opacity: 1;
-    /* Always visible */
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
 }
 
-/* Removed card:hover opacity trigger */
+.card:hover .project-description {
+    opacity: 1;
+}
 
 .tags {
     display: flex;
@@ -517,6 +512,7 @@ textarea::placeholder {
     color: var(--muted)
 }
 
+/* Footer Revert */
 .site-footer {
     padding: 80px 0 40px;
     background: var(--bg);
