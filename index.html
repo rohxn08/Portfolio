@@ -1,127 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rohan R | Portfolio</title>
-    <meta name="description" content="Portfolio of Rohan R - AI & Data Science Engineering" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="assets/favicon.png" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container header-row">
-        <div class="brand">
-          <span id="brand-name">Rohan R</span>
-          <span class="brand-role">AI & Data Science</span>
-        </div>
-        <div class="header-contacts" id="header-contacts"></div>
-        <nav class="nav" id="nav">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#education">Education</a>
-          <a href="#certs">Certifications</a>
-          <a href="#contact">Contact</a>
-          <a id="resume-link" target="_blank" rel="noopener">Resume</a>
-        </nav>
-        <button id="theme-toggle" class="icon-button" aria-label="Toggle theme">🌙</button>
-        <button id="menu-toggle" class="icon-button burger" aria-label="Menu" aria-expanded="false">☰</button>
-      </div>
-    </header>
 
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <h1 id="hero-name">Rohan R</h1>
-            <p class="subtitle">Aspiring AI and Data Science Engineer</p>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rohan R | Portfolio</title>
+  <meta name="description" content="Portfolio of Rohan R - AI & Data Science Engineering" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">
+        <span id="brand-name">ROHAN R®</span>
+      </div>
+      <nav class="nav" id="nav">
+        <a href="#projects">Work</a>
+        <a href="#about">Studio</a>
+        <a href="#contact">Contact</a>
+        <a id="resume-link" target="_blank" rel="noopener">[ Resume ]</a>
+      </nav>
+      <button id="menu-toggle" class="icon-button burger" aria-label="Menu" aria-expanded="false">MENU</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-wrapper">
+        <div class="hero-visual">
+          <img src="assets/images/hero_bg.png" alt="Abstract Rock Formation" class="hero-img">
+          <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+          <h1 class="mega-title">ROHAN<br>R<span class="tm">®</span></h1>
+          <div class="hero-details">
+            <p class="subtitle">AI & Data Science Engineer<br>Based in India.</p>
             <p id="objective" class="objective"></p>
             <div class="cta-group">
-              <a class="button primary" href="#projects">View Projects</a>
-              <a class="button" id="cta-resume" target="_blank" rel="noopener">Download Resume</a>
+              <div class="stat-box">
+                <span class="stat-num">01</span>
+                <span class="stat-label">Projects</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-num">02</span>
+                <span class="stat-label">Resume</span>
+              </div>
             </div>
           </div>
-          <div class="hero-card">
-            <ul class="contact-list" id="contact-list"></ul>
-          </div>
         </div>
-      </section>
-
-      <section id="about" class="section">
-        <div class="container">
-          <h2>About</h2>
-          <div id="about-text"></div>
-        </div>
-      </section>
-
-      <section id="skills" class="section alt">
-        <div class="container">
-          <h2>Skills</h2>
-
-          <h3 class="skill-category">Languages</h3>
-          <div class="chips" id="skills-languages"></div>
-
-          <h3 class="skill-category">AI & Machine Learning</h3>
-          <div class="chips" id="skills-ai-ml"></div>
-
-          <h3 class="skill-category">Generative AI & NLP</h3>
-          <div class="chips" id="skills-genai-nlp"></div>
-
-          <h3 class="skill-category">Tools & Technologies</h3>
-          <div class="chips" id="skills-tools"></div>
-        </div>
-      </section>
-
-      <section id="projects" class="section">
-        <div class="container">
-          <h2>Projects</h2>
-          <div class="grid" id="projects-grid"></div>
-        </div>
-      </section>
-
-      <section id="education" class="section alt">
-        <div class="container">
-          <h2>Education</h2>
-          <div id="education-list" class="timeline"></div>
-        </div>
-      </section>
-
-      <section id="certs" class="section">
-        <div class="container">
-          <h2>Certifications</h2>
-          <ul id="certs-list" class="list"></ul>
-        </div>
-      </section>
-
-      <section id="contact" class="section alt">
-        <div class="container">
-          <h2>Contact</h2>
-          <form id="contact-form" class="contact-form">
-            <div class="form-row">
-              <input type="text" id="name" name="name" placeholder="Your name" required />
-              <input type="email" id="email" name="email" placeholder="Your email" required />
-            </div>
-            <textarea id="message" name="message" placeholder="Your message" rows="5" required></textarea>
-            <button type="submit" class="button primary">Send</button>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-row">
-        <span>© <span id="year"></span> <span id="footer-name">Rohan R</span></span>
-        <div class="socials" id="socials"></div>
       </div>
-    </footer>
+    </section>
 
-    <script src="assets/data/data.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
-  </html>
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About</h2>
+        <div id="about-text"></div>
+      </div>
+    </section>
 
+    <section id="skills" class="section alt">
+      <div class="container">
+        <h2>Skills</h2>
 
+        <h3 class="skill-category">Languages</h3>
+        <div class="chips" id="skills-languages"></div>
+
+        <h3 class="skill-category">AI & Machine Learning</h3>
+        <div class="chips" id="skills-ai-ml"></div>
+
+        <h3 class="skill-category">Generative AI & NLP</h3>
+        <div class="chips" id="skills-genai-nlp"></div>
+
+        <h3 class="skill-category">Tools & Technologies</h3>
+        <div class="chips" id="skills-tools"></div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Projects</h2>
+        <div class="grid" id="projects-grid"></div>
+      </div>
+    </section>
+
+    <section id="education" class="section alt">
+      <div class="container">
+        <h2>Education</h2>
+        <div id="education-list" class="timeline"></div>
+      </div>
+    </section>
+
+    <section id="certs" class="section">
+      <div class="container">
+        <h2>Certifications</h2>
+        <ul id="certs-list" class="list"></ul>
+      </div>
+    </section>
+
+    <section id="contact" class="section alt">
+      <div class="container">
+        <h2>Contact</h2>
+        <form id="contact-form" class="contact-form">
+          <div class="form-row">
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+            <input type="email" id="email" name="email" placeholder="Your email" required />
+          </div>
+          <textarea id="message" name="message" placeholder="Your message" rows="5" required></textarea>
+          <button type="submit" class="button primary">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>© <span id="year"></span> <span id="footer-name">Rohan R</span></span>
+      <div class="socials" id="socials"></div>
+    </div>
+  </footer>
+
+  <script src="assets/data/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

@@ -28,19 +28,11 @@
             const card = create('article', { class: 'card' });
             card.appendChild(create('h3', {}, [p.title]));
 
-            // Description section
-            const descLabel = create('div', { class: 'project-label' }, ['Description:']);
-            card.appendChild(descLabel);
             card.appendChild(create('p', { class: 'project-description' }, [p.summary || p.description || 'No description available.']));
 
-            // Tech Stack section
-            const techLabel = create('div', { class: 'project-label' }, ['Tech Stack:']);
-            card.appendChild(techLabel);
             const tags = create('div', { class: 'tags' });
             if (p.tech && p.tech.length > 0) {
                 p.tech.forEach(t => tags.appendChild(create('span', { class: 'tag' }, [t])));
-            } else {
-                tags.appendChild(create('span', { class: 'tag', style: 'opacity: 0.6' }, ['Not specified']));
             }
             card.appendChild(tags);
 
