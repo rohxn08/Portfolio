@@ -35,49 +35,57 @@ const PORTFOLIO_DATA = {
             title: "Face Anti-Spoofing System",
             summary: "Dual-approach system using LBP+SVM and lightweight CNN to detect spoofed faces. Features robust preprocessing and real-time webcam testing.",
             tech: ["Python", "OpenCV", "TensorFlow", "Scikit-Learn", "Streamlit"],
-            link: "https://github.com/rohxn08/Face-anti-spoofing-system"
+            link: "https://github.com/rohxn08/Face-anti-spoofing-system",
+            image: "assets/images/avatar_1.png"
         },
         {
             title: "AI-Powered Document Search (RAG)",
             summary: "Intelligent document search and QA system using RAG with Google Gemini API, FAISS vector search, and Sentence-Transformers.",
             tech: ["Python", "RAG", "Google Gemini API", "FAISS", "Streamlit"],
-            link: "https://github.com/rohxn08/AI-powered-Document-search-using-RAG"
+            link: "https://github.com/rohxn08/AI-powered-Document-search-using-RAG",
+            image: "assets/images/avatar_2.png"
         },
         {
             title: "Sign Language Translator",
             summary: "Real-time sign language detection system using OpenCV and MediaPipe with custom classifier training and a web interface.",
             tech: ["Python", "OpenCV", "MediaPipe", "HTML/CSS"],
-            link: "https://github.com/rohxn08/sign-language-translator"
+            link: "https://github.com/rohxn08/sign-language-translator",
+            image: "assets/images/avatar_3.png"
         },
         {
             title: "Automatic Image Enhancer",
             summary: "Enhances images using CLAHE for brightness/contrast improvement with real-time side-by-side visualization.",
             tech: ["Python", "NumPy", "OpenCV"],
-            link: "https://github.com/rohxn08/Automatic-Image-Enhancer"
+            link: "https://github.com/rohxn08/Automatic-Image-Enhancer",
+            image: "assets/images/avatar_4.png"
         },
         {
             title: "Comparative Score Visualization",
             summary: "Plot wellness scores using dummy and original data with a clean UI.",
             tech: ["Python", "Plotly", "Pandas", "NumPy", "HTML"],
-            link: "https://github.com/rohxn08/Comparative-Score-Visualization-of-wellness-scores"
+            link: "https://github.com/rohxn08/Comparative-Score-Visualization-of-wellness-scores",
+            image: "assets/images/avatar_5.png"
         },
         {
             title: "Binance Futures Order Bot",
             summary: "CLI trading bot for Binance USDT-M Futures with strategies (TWAP, Grid, OCO emulation).",
             tech: ["Python", "CLI"],
-            link: "https://github.com/rohxn08/Rohan-Binance_bot"
+            link: "https://github.com/rohxn08/Rohan-Binance_bot",
+            image: "assets/images/avatar_6.png"
         },
         {
             title: "MNIST Digit Prediction",
             summary: "Handwritten digit classifier trained on MNIST dataset.",
             tech: ["Python", "Deep Learning"],
-            link: "https://github.com/rohxn08/MNIST-digit-prediction"
+            link: "https://github.com/rohxn08/MNIST-digit-prediction",
+            image: "assets/images/avatar_1.png"
         },
         {
             title: "Chatting Via Bluetooth",
             summary: "Web interface enabling real‑time Bluetooth communication between two devices.",
             tech: ["Python", "Sockets", "Flask", "HTML", "CSS", "JavaScript"],
-            link: "https://github.com/rohxn08/Chatting-Via-Bluetooth"
+            link: "https://github.com/rohxn08/Chatting-Via-Bluetooth",
+            image: "assets/images/avatar_2.png"
         }
     ],
     education: [
