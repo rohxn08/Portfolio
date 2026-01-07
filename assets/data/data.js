@@ -22,7 +22,7 @@ const PORTFOLIO_DATA = {
         linkedin: "https://www.linkedin.com/in/rohan-r-63b1a62aa/"
     },
     resume: {
-        url: "rohan resume.pdf" // points to PDF placed in project root
+        url: "rohan_resume.pdf" // points to PDF placed in project root
     },
     skills: {
         languages: ["Python", "C++", "SQL", "HTML5", "CSS3"],
