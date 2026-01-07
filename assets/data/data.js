@@ -33,56 +33,56 @@ const PORTFOLIO_DATA = {
     projects: [
         {
             title: "Face Anti-Spoofing System",
-            summary: "Dual-approach system using LBP+SVM and lightweight CNN to detect spoofed faces. Features robust preprocessing and real-time webcam testing.",
+            summary: "• Hybrid biometric security system combining classical LBP+SVM texture analysis and modern MobileNetV2 CNN.<br>• Features real-time webcam protection with temporal voting to stabilize predictions and eliminate flickering.<br>• Includes smart scene detection that resets logic on subject changes for instant, snappy response.<br>• Supports dual-mode analysis: high-fidelity static image verification and low-latency live video streaming.<br>• Polished Streamlit interface with visual feedback, bounding boxes, and real-time confidence scoring.",
             tech: ["Python", "OpenCV", "TensorFlow", "Scikit-Learn", "Streamlit"],
             link: "https://github.com/rohxn08/Face-anti-spoofing-system",
             image: "assets/images/avatar_11.png"
         },
         {
             title: "AI-Powered Document Search (RAG)",
-            summary: "Intelligent document search and QA system using RAG with Google Gemini API, FAISS vector search, and Sentence-Transformers.",
-            tech: ["Python", "RAG", "Google Gemini API", "FAISS", "Streamlit"],
+            summary: "• Full-stack Retrieval-Augmented Generation (RAG) system enabling natural language Q&A from uploaded documents.<br>• Features robust ingestion for PDFs, DOCX, TXT, and URLs with automatic text extraction and intelligent chunking.<br>• Integrates FAISS vector database and Sentence-Transformers for high-speed, accurate similarity search.<br>• Powered by Google Gemini API/OpeanAI for generating context-aware answers with precise source citations.<br>• User-friendly Streamlit interface with conversation history tracking and dockerized deployment support.",
+            tech: ["Python", "RAG", "FAISS", "Streamlit", "Google Gemini API"],
             link: "https://github.com/rohxn08/AI-powered-Document-search-using-RAG",
             image: "assets/images/avatar_22.png"
         },
         {
             title: "Sign Language Translator",
-            summary: "Real-time sign language detection system using OpenCV and MediaPipe with custom classifier training and a web interface.",
+            summary: "• Real-time sign language detection system leveraging OpenCV and MediaPipe for accurate gesture tracking and inference.<br>• Includes a comprehensive pipeline for dataset creation: capturing webcam images, structuring data, and training custom classifiers.<br>• Features a browser-based user interface for accessible live detection and testing.<br>• Generates detailed performance metrics including accuracy scores, classification reports, and confusion matrices.<br>• Incorporates model explainability tools (LIME & SHAP) and text-to-speech output to vocalize recognized signs.",
             tech: ["Python", "OpenCV", "MediaPipe", "HTML/CSS"],
             link: "https://github.com/rohxn08/sign-language-translator",
             image: "assets/images/avatar_33.png"
         },
         {
             title: "Automatic Image Enhancer",
-            summary: "Enhances images using CLAHE for brightness/contrast improvement with real-time side-by-side visualization.",
+            summary: "• Automatic image enhancement tool that intelligently adjusts brightness and contrast using the CLAHE algorithm.<br>• Features a modern, user-friendly web interface built with Streamlit for easy uploading and real-time preview.<br>• Includes a robust CLI mode for quick batch processing and scripting integration.<br>• Supports all standard image formats (JPG, PNG) with automatic result saving.<br>• Built on a high-performance stack of OpenCV and NumPy for rapid image processing.",
             tech: ["Python", "NumPy", "OpenCV"],
             link: "https://github.com/rohxn08/Automatic-Image-Enhancer",
             image: "assets/images/avatar_44.png"
         },
         {
             title: "Comparative Score Visualization",
-            summary: "Plot wellness scores using dummy and original data with a clean UI.",
+            summary: "• Analytic visualization tool for tracking comparative user wellness scores over time using Python and Plotly.<br>• Supports dual data modes: generating synthetic dummy scenarios and processing real collected datasets (activity, sleep, weight).<br>• Features a dynamic, interactive web-based interface with hover-over details for precise trend analysis.<br>• Implements clear color-coded legends and distinct user identification for multi-user comparison.<br>• Generates immediate HTML output viewable directly in browsers or via Live Server.",
             tech: ["Python", "Plotly", "Pandas", "NumPy", "HTML"],
             link: "https://github.com/rohxn08/Comparative-Score-Visualization-of-wellness-scores",
             image: "assets/images/avatar_55.png"
         },
         {
             title: "Binance Futures Order Bot",
-            summary: "CLI trading bot for Binance USDT-M Futures with strategies (TWAP, Grid, OCO emulation).",
+            summary: "• CLI-based high-frequency trading bot for Binance USDT-M Futures with robust error validation.<br>• Supports advanced order strategies including Stop-WLimit, OCO (emulated), TWAP, and Grid trading.<br>• Features centralized logging system with error tracing for reliable production monitoring.<br>• Includes a simulation mode ('mock_demo') to test strategies risk-free without API keys.<br>• Configurable for both Testnet and Mainnet environments with secure environment variable management.",
             tech: ["Python", "CLI"],
             link: "https://github.com/rohxn08/Rohan-Binance_bot",
             image: "assets/images/avatar_66.png"
         },
         {
             title: "MNIST Digit Prediction",
-            summary: "Handwritten digit classifier trained on MNIST dataset.",
+            summary: "• Interactive desktop GUI application for handwritten digit recognition built with Python and Tkinter.<br>• Features a real-time drawing canvas allowing users to sketch digits (0-9) using a mouse input.<br>• Powered by a pre-trained Convolutional Neural Network (CNN) model (Keras/TensorFlow) for high-accuracy classification.<br>• Delivers instant feedback with prediction results and confidence scores upon clicking 'Predict'.<br>• Lightweight and easy to deploy with utility functions for canvas clearing and image preprocessing.",
             tech: ["Python", "Deep Learning"],
             link: "https://github.com/rohxn08/MNIST-digit-prediction",
             image: "assets/images/avatar_11.png"
         },
         {
             title: "Chatting Via Bluetooth",
-            summary: "Web interface enabling real‑time Bluetooth communication between two devices.",
+            summary: "• Python-based chat system enabling reliable device-to-device communication via Bluetooth RFCOMM sockets.<br>• Wrapped in a modern Flask web interface for easy browser-based control and message visualization.<br>• Supports dual operating modes (Server/Host and Client/Connector) configurable via the UI.<br>• Implements real-time message piping using Python threading and subprocess management.<br>• Eliminates complex terminal usage by offering a clean, unified dashboard for connection management.",
             tech: ["Python", "Sockets", "Flask", "HTML", "CSS", "JavaScript"],
             link: "https://github.com/rohxn08/Chatting-Via-Bluetooth",
             image: "assets/images/avatar_22.png"

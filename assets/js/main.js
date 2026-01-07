@@ -23,39 +23,133 @@
     }
 
     function renderProjects() {
-        const grid = byId('projects-grid');
-        d.projects.forEach(p => {
-            const card = create('article', { class: 'card' });
+        const slider = byId('projects-slider');
+        const detailContainer = byId('project-detail');
+        if (!slider || !detailContainer) return;
 
-            // Image wrapper
-            const imgWrapper = create('div', { class: 'card-image-wrapper' });
+        // Clear existing
+        slider.innerHTML = '';
+
+        d.projects.forEach((p, index) => {
+            const card = create('article', { class: 'slider-card' });
+
+            // Image (Top)
             if (p.image) {
-                const img = create('img', { src: p.image, alt: p.title, class: 'card-image', loading: 'lazy' });
-                imgWrapper.appendChild(img);
+                // Use the standardized avatars
+                const img = create('img', {
+                    src: p.image,
+                    alt: p.title,
+                    class: 'slider-card-img',
+                    loading: 'lazy'
+                });
+                card.appendChild(img);
             }
-            card.appendChild(imgWrapper);
 
-            // Content overlay
-            const content = create('div', { class: 'card-content' });
+            // Content Container
+            const content = create('div', { class: 'slider-card-content' });
 
+            // Title
             content.appendChild(create('h3', {}, [p.title]));
-            content.appendChild(create('p', { class: 'project-description' }, [p.summary || p.description || '']));
 
+            // Tags (Tech Stack) only
             const tags = create('div', { class: 'tags' });
             if (p.tech && p.tech.length > 0) {
-                p.tech.forEach(t => tags.appendChild(create('span', { class: 'tag' }, [t])));
+                // Limit to 3 tags to prevent overflow
+                const limit = 3;
+                const showTags = p.tech.slice(0, limit);
+                showTags.forEach(t => tags.appendChild(create('span', { class: 'tag' }, [t])));
+
+                if (p.tech.length > limit) {
+                    tags.appendChild(create('span', { class: 'tag', style: 'background: var(--brand); color: #fff; border:none;' }, [`+${p.tech.length - limit}`]));
+                }
             }
             content.appendChild(tags);
 
             card.appendChild(content);
 
-            if (p.link) {
-                card.style.cursor = 'pointer';
-                card.onclick = () => window.open(p.link, '_blank');
-            }
-            grid.appendChild(card);
-        });
+            // Click Handler
+            card.onclick = () => {
+                // Formatting active state
+                Array.from(slider.children).forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
 
+                showProjectDetail(index);
+            };
+
+            slider.appendChild(card);
+        });
+    }
+
+    function showProjectDetail(index) {
+        const p = d.projects[index];
+        const container = byId('project-detail');
+
+        // Reveal container
+        container.classList.remove('projects-hidden');
+        container.innerHTML = ''; // Clear prev
+
+        // Reset animation
+        container.style.animation = 'none';
+        container.offsetHeight; /* trigger reflow */
+        container.style.animation = 'fadeIn 0.5s ease';
+
+        // Left: Avatar
+        const leftCol = create('div', { class: 'detail-avatar-wrapper' });
+        // Use the large avatar. 
+        // Note: p.image points to assets/images/avatar_XX.png usually
+        if (p.image) {
+            const img = create('img', {
+                src: p.image,
+                alt: p.title,
+                class: 'detail-avatar',
+                loading: 'lazy'
+            });
+            leftCol.appendChild(img);
+        }
+        container.appendChild(leftCol);
+
+        // Right: Content
+        const rightCol = create('div', { class: 'detail-content' });
+
+        const header = create('div', { class: 'detail-header' });
+        header.appendChild(create('h3', { class: 'detail-title' }, [p.title]));
+
+        // Links
+        const linkContainer = create('div', { class: 'detail-links' });
+        if (p.link) {
+            const btn = create('a', {
+                href: p.link,
+                target: '_blank',
+                class: 'button primary',
+                style: 'margin-right: 16px'
+            }, ['View Project']);
+            linkContainer.appendChild(btn);
+        }
+        header.appendChild(linkContainer);
+        rightCol.appendChild(header);
+
+        // Summary
+        // User requested "detailed 5 line summary". 
+        // We use p.summary for now. Ideally data.js should have longer text if needed.
+        // Summary
+        // Use html prop to render <br> tags
+        const desc = create('div', { class: 'detail-desc', html: p.summary });
+        rightCol.appendChild(desc);
+
+        // Full Tech Stack in detail view?
+        const techList = create('div', { style: 'margin-top: 20px' });
+        techList.appendChild(create('h4', { style: 'margin-bottom:10px; color:var(--text); text-transform:uppercase; font-size:0.9rem;' }, ['Technology Stack']));
+        const tags = create('div', { class: 'tags' });
+        if (p.tech) {
+            p.tech.forEach(t => tags.appendChild(create('span', { class: 'tag' }, [t])));
+        }
+        techList.appendChild(tags);
+        rightCol.appendChild(techList);
+
+        container.appendChild(rightCol);
+
+        // Scroll to detail view slightly if on mobile? 
+        // container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     function renderEducation() {

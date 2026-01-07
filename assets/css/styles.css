@@ -600,3 +600,180 @@ textarea::placeholder {
 .light .site-header {
     background: linear-gradient(to bottom, rgba(246, 248, 251, .9), rgba(246, 248, 251, .6));
 }
+
+/* --- Project Slider & Detail View --- */
+.projects-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.projects-slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 20px;
+    scroll-snap-type: x mandatory;
+    margin: 0 -20px;
+    /* Bleed to edge for easy scrolling */
+    padding: 0 20px 20px;
+    /* Padding inside */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+
+.projects-slider::-webkit-scrollbar {
+    height: 8px;
+}
+
+.projects-slider::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.projects-slider::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 4px;
+}
+
+.slider-card {
+    min-width: 300px;
+    max-width: 300px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0;
+    /* Removing padding to let image bleed */
+    cursor: pointer;
+    scroll-snap-align: start;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    /* content + image needs more height */
+    height: 380px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-card:hover,
+.slider-card.active {
+    border-color: var(--brand);
+    transform: translateY(-4px);
+}
+
+.slider-card.active {
+    background: var(--bg-alt);
+}
+
+.slider-card-img {
+    width: 100%;
+    height: 220px;
+    /* Fixed height for consistency */
+    object-fit: contain;
+    /* Maintain full avatar visibility */
+    object-position: center;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.slider-card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.slider-card h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 12px;
+}
+
+
+.project-detail {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 40px;
+    animation: fadeIn 0.5s ease;
+    align-items: start;
+}
+
+.detail-avatar-wrapper {
+    width: 100%;
+    /* aspect-ratio: 4/5; */
+    /* Matches our avatar dimensions roughly */
+    background: var(--bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-avatar {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.detail-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+}
+
+.detail-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    color: var(--text);
+    line-height: 1;
+}
+
+.detail-links {
+    margin-top: 16px;
+}
+
+.detail-desc {
+    font-size: 1.1rem;
+    color: var(--text-sec);
+    line-height: 1.8;
+}
+
+.projects-hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 800px) {
+    .project-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-avatar-wrapper {
+        max-width: 100%;
+    }
+}
