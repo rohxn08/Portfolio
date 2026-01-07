@@ -309,5 +309,24 @@
         handleMenu();
         handleContactForm();
         setTimeout(initAnimations, 100);
+
+        // Close project detail when clicking outside
+        document.addEventListener('click', (e) => {
+            const slider = byId('projects-slider');
+            const detail = byId('project-detail');
+
+            // If click is NOT inside a card AND NOT inside the detail view
+            if (slider && detail &&
+                !e.target.closest('.slider-card') &&
+                !e.target.closest('.project-detail') &&
+                !detail.classList.contains('projects-hidden')) {
+
+                // Hide detail view
+                detail.classList.add('projects-hidden');
+
+                // Remove active state from all cards
+                Array.from(slider.children).forEach(c => c.classList.remove('active'));
+            }
+        });
     });
 })();

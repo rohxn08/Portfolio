@@ -616,8 +616,8 @@ textarea::placeholder {
     scroll-snap-type: x mandatory;
     margin: 0 -20px;
     /* Bleed to edge for easy scrolling */
-    padding: 0 20px 20px;
-    /* Padding inside */
+    padding: 20px 20px 20px;
+    /* Added top padding so hover/active pop doesn't clip */
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
@@ -654,14 +654,28 @@ textarea::placeholder {
     position: relative;
 }
 
-.slider-card:hover,
-.slider-card.active {
+.slider-card:hover {
     border-color: var(--brand);
     transform: translateY(-4px);
 }
 
 .slider-card.active {
-    background: var(--bg-alt);
+    background: var(--brand) !important;
+    border-color: var(--brand);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(254, 61, 0, 0.25);
+}
+
+.slider-card.active h3 {
+    color: #ffffff;
+    /* White text on red background */
+}
+
+.slider-card.active .tag {
+    background: rgba(255, 255, 255, 0.2);
+    /* Semi-transparent tags */
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .slider-card-img {
