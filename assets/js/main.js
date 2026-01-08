@@ -23,92 +23,81 @@
     }
 
     function renderProjects() {
-        const slider = byId('projects-slider');
+        const sliderContainer = byId('projects-slider');
         const detailContainer = byId('project-detail');
-        if (!slider || !detailContainer) return;
+        if (!sliderContainer || !detailContainer) return;
 
         // Clear existing
-        slider.innerHTML = '';
+        sliderContainer.innerHTML = '';
 
-        d.projects.forEach((p, index) => {
-            const card = create('article', { class: 'slider-card' });
+        // Setup Infinite Slider Structure
+        const track = create('div', { class: 'project-track-infinite' });
+        sliderContainer.appendChild(track);
 
-            // Image (Top)
+        // Function to create a card
+        const createCard = (p) => {
+            const card = create('div', { class: 'slider-card' });
+
+            // Image
             if (p.image) {
-                // Use the standardized avatars
-                const img = create('img', {
-                    src: p.image,
-                    alt: p.title,
-                    class: 'slider-card-img',
-                    loading: 'lazy'
-                });
+                const img = create('img', { src: p.image, class: 'slider-card-img', alt: p.title, loading: 'lazy' });
                 card.appendChild(img);
             }
 
-            // Content Container
+            // Content
             const content = create('div', { class: 'slider-card-content' });
-
-            // Title
             content.appendChild(create('h3', {}, [p.title]));
 
-            // Tags (Tech Stack) only
-            const tags = create('div', { class: 'tags' });
-            if (p.tech && p.tech.length > 0) {
-                // Limit to 3 tags to prevent overflow
-                const limit = 3;
-                const showTags = p.tech.slice(0, limit);
-                showTags.forEach(t => tags.appendChild(create('span', { class: 'tag' }, [t])));
-
-                if (p.tech.length > limit) {
-                    tags.appendChild(create('span', { class: 'tag', style: 'background: var(--brand); color: #fff; border:none;' }, [`+${p.tech.length - limit}`]));
-                }
+            const tags = create('div', { class: 'slider-tags' });
+            if (p.tech) {
+                p.tech.slice(0, 3).forEach(t => tags.appendChild(create('span', { class: 'slider-tag' }, [t])));
             }
             content.appendChild(tags);
-
             card.appendChild(content);
 
-            // Click Handler
-            card.onclick = () => {
-                // Formatting active state
-                Array.from(slider.children).forEach(c => c.classList.remove('active'));
+            // Click event
+            card.onclick = (e) => {
+                // Remove active class from all cards (even duplicates)
+                Array.from(track.children).forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked card
                 card.classList.add('active');
 
-                showProjectDetail(index);
+                // Show details (this pauses animation via CSS hover on track, 
+                // but user must keep mouse over or we need JS pause?)
+                // Actually, clicking selects it. User reads details below.
+
+                showProjectDetails(p);
+                e.stopPropagation();
             };
 
-            slider.appendChild(card);
-        });
+            return card;
+        };
+
+        // Render original set
+        d.projects.forEach(p => track.appendChild(createCard(p)));
+        // Render duplicate set for infinite loop (double up to ensure smoothness)
+        d.projects.forEach(p => track.appendChild(createCard(p)));
     }
 
-    function showProjectDetail(index) {
-        const p = d.projects[index];
-        const container = byId('project-detail');
+    function showProjectDetails(p) {
+        const detail = byId('project-detail');
+        if (!detail) return;
 
-        // Reveal container
-        container.classList.remove('projects-hidden');
-        container.innerHTML = ''; // Clear prev
+        // Show detail view inline
+        detail.classList.remove('projects-hidden');
 
-        // Reset animation
-        container.style.animation = 'none';
-        container.offsetHeight; /* trigger reflow */
-        container.style.animation = 'fadeIn 0.5s ease';
+        detail.innerHTML = '';
 
-        // Left: Avatar
+        // Create Left Col (Avatar)
         const leftCol = create('div', { class: 'detail-avatar-wrapper' });
-        // Use the large avatar. 
-        // Note: p.image points to assets/images/avatar_XX.png usually
         if (p.image) {
-            const img = create('img', {
-                src: p.image,
-                alt: p.title,
-                class: 'detail-avatar',
-                loading: 'lazy'
-            });
+            const img = create('img', { src: p.image, class: 'detail-avatar', alt: p.title });
             leftCol.appendChild(img);
         }
-        container.appendChild(leftCol);
+        detail.appendChild(leftCol);
 
-        // Right: Content
+        // Create Right Col (Content)
         const rightCol = create('div', { class: 'detail-content' });
 
         const header = create('div', { class: 'detail-header' });
@@ -116,40 +105,53 @@
 
         // Links
         const linkContainer = create('div', { class: 'detail-links' });
-        if (p.link) {
-            const btn = create('a', {
-                href: p.link,
-                target: '_blank',
-                class: 'button primary',
-                style: 'margin-right: 16px'
-            }, ['View Project']);
+
+        // Smart Link Detection
+        let githubUrl = p.github;
+        let demoUrl = p.link;
+
+        // If no explicit github key, but link is github, treat as github
+        if (!githubUrl && demoUrl && demoUrl.includes('github.com')) {
+            githubUrl = demoUrl;
+            demoUrl = null; // Don't duplicate as demo
+        }
+
+        // Primary Action: GitHub
+        if (githubUrl) {
+            const btn = create('button', { class: 'button primary' }, ['GitHub Repository']);
+            btn.onclick = () => window.open(githubUrl, '_blank');
             linkContainer.appendChild(btn);
         }
+
+        // Secondary: Live Demo
+        if (demoUrl) {
+            const btn = create('button', { class: 'button' }, ['Live Demo']);
+            btn.onclick = () => window.open(demoUrl, '_blank');
+            linkContainer.appendChild(btn);
+        }
+
         header.appendChild(linkContainer);
         rightCol.appendChild(header);
 
-        // Summary
-        // User requested "detailed 5 line summary". 
-        // We use p.summary for now. Ideally data.js should have longer text if needed.
-        // Summary
-        // Use html prop to render <br> tags
-        const desc = create('div', { class: 'detail-desc', html: p.summary });
+        const desc = create('div', { class: 'detail-desc', html: p.summary || p.description || '' });
         rightCol.appendChild(desc);
 
-        // Full Tech Stack in detail view?
-        const techList = create('div', { style: 'margin-top: 20px' });
-        techList.appendChild(create('h4', { style: 'margin-bottom:10px; color:var(--text); text-transform:uppercase; font-size:0.9rem;' }, ['Technology Stack']));
-        const tags = create('div', { class: 'tags' });
+        // Tech (if needed detailed list)
         if (p.tech) {
-            p.tech.forEach(t => tags.appendChild(create('span', { class: 'tag' }, [t])));
+            const techHeader = create('h4', { style: 'margin-top:20px; font-size:0.9rem; text-transform:uppercase; color:var(--text);' }, ['Tech Stack']);
+            rightCol.appendChild(techHeader);
+
+            const chips = create('div', { class: 'chips', style: 'margin-top:10px;' });
+            p.tech.forEach(t => chips.appendChild(create('span', { class: 'chip' }, [t])));
+            rightCol.appendChild(chips);
         }
-        techList.appendChild(tags);
-        rightCol.appendChild(techList);
 
-        container.appendChild(rightCol);
+        detail.appendChild(rightCol);
 
-        // Scroll to detail view slightly if on mobile? 
-        // container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Scroll to details
+        setTimeout(() => {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
     }
 
     function renderEducation() {
@@ -310,23 +312,134 @@
         handleContactForm();
         setTimeout(initAnimations, 100);
 
-        // Close project detail when clicking outside
-        document.addEventListener('click', (e) => {
-            const slider = byId('projects-slider');
-            const detail = byId('project-detail');
-
-            // If click is NOT inside a card AND NOT inside the detail view
-            if (slider && detail &&
-                !e.target.closest('.slider-card') &&
-                !e.target.closest('.project-detail') &&
-                !detail.classList.contains('projects-hidden')) {
-
-                // Hide detail view
-                detail.classList.add('projects-hidden');
-
-                // Remove active state from all cards
-                Array.from(slider.children).forEach(c => c.classList.remove('active'));
-            }
-        });
+        // ... click handler ...
     });
+    document.addEventListener('click', (e) => {
+        const slider = byId('projects-slider');
+        const detail = byId('project-detail');
+
+        // If click is NOT inside a card AND NOT inside the detail view
+        if (slider && detail &&
+            !e.target.closest('.slider-card') &&
+            !e.target.closest('.project-detail') &&
+            !detail.classList.contains('projects-hidden')) {
+
+            // Hide detail view
+            detail.classList.add('projects-hidden');
+
+            // Remove active state from all cards
+            Array.from(slider.children).forEach(c => c.classList.remove('active'));
+        }
+    });
+
+    initParticles();
+
+    function initParticles() {
+        const canvas = document.getElementById('neural-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        // Configuration
+        const particleCount = 60; // Slightly more dense
+        const connectionDistance = 140;
+        const mouseDistance = 200;
+
+        // Resize handler
+        function resize() {
+            width = canvas.width = canvas.parentElement.offsetWidth;
+            height = canvas.height = canvas.parentElement.offsetHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Mouse tracking
+        let mouse = { x: null, y: null };
+        canvas.parentElement.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+        canvas.parentElement.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                // Mouse interaction (repulse)
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouseDistance) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        const directionX = forceDirectionX * force * 5; // Strength
+                        const directionY = forceDirectionY * force * 5;
+                        this.vx -= directionX * 0.05;
+                        this.vy -= directionY * 0.05;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = '#FE3D00'; // Brand color dots
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Init particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Connect particles
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        // Opacity based on distance
+                        const opacity = 1 - (distance / connectionDistance);
+                        ctx.strokeStyle = `rgba(254, 61, 0, ${opacity * 0.4})`; // Brand color lines
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
 })();

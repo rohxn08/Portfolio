@@ -32,27 +32,34 @@
 
   <main>
     <section class="hero">
-      <div class="hero-wrapper">
-        <div class="hero-visual">
-          <img src="assets/images/hero_bg.png" alt="Abstract Rock Formation" class="hero-img">
-          <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content">
-          <h1 class="mega-title">ROHAN<br>R<span class="tm">®</span></h1>
-          <div class="hero-details">
-            <p class="subtitle">AI & Data Science Engineer<br>Based in India.</p>
-            <p id="objective" class="objective"></p>
-            <div class="cta-group">
-              <div class="stat-box">
-                <span class="stat-num">01</span>
-                <span class="stat-label">Projects</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-num">02</span>
-                <span class="stat-label">Resume</span>
-              </div>
+      <div class="hero-layout">
+        <!-- 1. Left Vertical Sidebar -->
+        <aside class="hero-sidebar">
+          <nav class="vertical-nav">
+            <!-- Empty sidebar as requested -->
+          </nav>
+        </aside>
+
+        <!-- 2. Main Content Area -->
+        <div class="hero-grid">
+
+          <!-- Left: Brand & Bio -->
+          <div class="hero-info">
+            <h1 class="niki-title">ROHAN<br><span class="highlight">R</span></h1>
+
+            <div class="hero-bio-box">
+              <p class="bio-role">AI & Data Science Engineer</p>
+              <p class="bio-text">
+                An Independent AI Engineer<br>
+                specializing in OCR, Computer Vision,<br>
+                and Generative AI.
+              </p>
+              <a href="#about" class="bio-btn">About Me &rarr;</a>
             </div>
           </div>
+
+          <!-- Right: Empty -->
+          <div class="hero-gallery-placeholder"></div>
         </div>
       </div>
     </section>
@@ -85,15 +92,16 @@
     <section id="projects" class="section">
       <div class="container">
         <h2>Projects</h2>
-        <div class="projects-wrapper">
-          <div class="projects-slider" id="projects-slider">
-            <!-- Slider items injected by JS -->
-          </div>
-          <div id="project-detail" class="project-detail projects-hidden">
-            <!-- Detail injected by JS -->
-          </div>
+      </div>
+      <div class="projects-wrapper">
+        <div id="projects-slider" class="projects-slider">
+          <!-- Grid injected by JS -->
+        </div>
+        <div id="project-detail" class="project-detail projects-hidden">
+          <!-- Detail injected by JS -->
         </div>
       </div>
+
     </section>
 
     <section id="education" class="section alt">
@@ -132,7 +140,7 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="assets/data/data.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
