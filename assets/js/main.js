@@ -328,7 +328,9 @@
             detail.classList.add('projects-hidden');
 
             // Remove active state from all cards
-            Array.from(slider.children).forEach(c => c.classList.remove('active'));
+            // Remove active state from all cards
+            const allCards = slider.querySelectorAll('.slider-card');
+            allCards.forEach(c => c.classList.remove('active'));
         }
     });
 
