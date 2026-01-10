@@ -18,8 +18,7 @@ const PORTFOLIO_DATA = {
         email: "rohanramaswamy12@gmail.com"
     },
     social: {
-        github: "https://github.com/rohxn08",
-        linkedin: "https://www.linkedin.com/in/rohan-r-63b1a62aa/"
+        github: "https://github.com/rohxn08"
     },
     resume: {
         url: "rohan_resume.pdf" // points to PDF placed in project root

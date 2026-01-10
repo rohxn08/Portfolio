@@ -207,6 +207,31 @@
         });
     }
 
+    function renderContact() {
+        const form = byId('contact-form');
+        if (!form) return;
+
+        // Optional: If we wanted to inject address/phone above the form
+        // We could create a list here. For now, we ensure the function exists.
+        // The footer handles the primary contact links.
+    }
+
+    function initAnimations() {
+        // GSAP ScrollTrigger could go here
+        if (typeof gsap !== 'undefined') {
+            gsap.from('.section h2', {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: '.section',
+                    start: 'top 80%'
+                }
+            });
+        }
+    }
+
     function hydrate() {
         // ... existing hydrate code ...
         setText('brand-name', d.name);

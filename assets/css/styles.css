@@ -926,9 +926,20 @@ textarea::placeholder {
 }
 
 .footer-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-row>span {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--text);
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
 .socials {
