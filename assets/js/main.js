@@ -22,216 +22,157 @@
         items.forEach(t => container.appendChild(create('span', { class: 'chip' }, [t])));
     }
 
-    function renderProjects() {
+    function renderProjects(filter = 'all') {
         const sliderContainer = byId('projects-slider');
         const detailContainer = byId('project-detail');
         if (!sliderContainer || !detailContainer) return;
 
         // Clear existing
         sliderContainer.innerHTML = '';
+        sliderContainer.className = 'projects-slider'; // Reset class
 
-        // Setup Infinite Slider Structure
-        const track = create('div', { class: 'project-track-infinite' });
-        sliderContainer.appendChild(track);
+        // Filter Data
+        const filtered = filter === 'all'
+            ? d.projects
+            : d.projects.filter(p => p.category === filter);
 
-        // Function to create a card
-        const createCard = (p) => {
-            const card = create('div', { class: 'slider-card' });
+        if (filter === 'all') {
+            // INFINITE SLIDER MODE
+            const track = create('div', { class: 'project-track-infinite' });
+            sliderContainer.appendChild(track);
 
-            // Image
-            if (p.image) {
-                const img = create('img', { src: p.image, class: 'slider-card-img', alt: p.title, loading: 'lazy' });
-                card.appendChild(img);
-            }
+            // Render double set for loop
+            filtered.forEach(p => track.appendChild(createCard(p, track, true))); // true = isSlider
+            filtered.forEach(p => track.appendChild(createCard(p, track, true)));
+        } else {
+            // STATIC GRID MODE
+            sliderContainer.className = 'projects-grid'; // Switch to grid layout
+            filtered.forEach(p => sliderContainer.appendChild(createCard(p, sliderContainer, false)));
+        }
+    }
 
-            // Content
-            const content = create('div', { class: 'slider-card-content' });
-            content.appendChild(create('h3', {}, [p.title]));
+    // Extracted Card Creation to reused function
+    function createCard(p, container, isSlider) {
+        const card = create('div', { class: 'slider-card' });
 
-            const tags = create('div', { class: 'slider-tags' });
-            if (p.tech) {
-                p.tech.slice(0, 3).forEach(t => tags.appendChild(create('span', { class: 'slider-tag' }, [t])));
-            }
-            content.appendChild(tags);
-            card.appendChild(content);
+        // Image
+        if (p.image) {
+            const img = create('img', { src: p.image, class: 'slider-card-img', alt: p.title, loading: 'lazy' });
+            card.appendChild(img);
+        }
 
-            // Click event
-            card.onclick = (e) => {
-                // Remove active class from all cards (even duplicates)
-                Array.from(track.children).forEach(c => c.classList.remove('active'));
+        // Content
+        const content = create('div', { class: 'slider-card-content' });
+        content.appendChild(create('h3', {}, [p.title]));
 
-                // Add active class to clicked card
-                card.classList.add('active');
+        const tags = create('div', { class: 'slider-tags' });
+        if (p.tech) {
+            p.tech.slice(0, 3).forEach(t => tags.appendChild(create('span', { class: 'slider-tag' }, [t])));
+        }
+        content.appendChild(tags);
+        card.appendChild(content);
 
-                // Show details (this pauses animation via CSS hover on track, 
-                // but user must keep mouse over or we need JS pause?)
-                // Actually, clicking selects it. User reads details below.
+        // Click event
+        card.onclick = (e) => {
+            // Remove active class from neighbors
+            // If slider, it's container.children. If grid, same.
+            const siblings = isSlider ? container.children : container.parentElement.querySelectorAll('.slider-card');
+            Array.from(siblings).forEach(c => c.classList.remove('active'));
 
-                showProjectDetails(p);
-                e.stopPropagation();
-            };
-
-            return card;
+            // Add active class
+            card.classList.add('active');
+            showProjectDetails(p);
+            e.stopPropagation();
         };
 
-        // Render original set
-        d.projects.forEach(p => track.appendChild(createCard(p)));
-        // Render duplicate set for infinite loop (double up to ensure smoothness)
-        d.projects.forEach(p => track.appendChild(createCard(p)));
+        return card;
     }
 
     function showProjectDetails(p) {
         const detail = byId('project-detail');
         if (!detail) return;
-
-        // Show detail view inline
         detail.classList.remove('projects-hidden');
-
         detail.innerHTML = '';
 
-        // Create Left Col (Avatar)
         const leftCol = create('div', { class: 'detail-avatar-wrapper' });
         if (p.image) {
-            const img = create('img', { src: p.image, class: 'detail-avatar', alt: p.title });
-            leftCol.appendChild(img);
+            leftCol.appendChild(create('img', { src: p.image, class: 'detail-avatar', alt: p.title }));
         }
         detail.appendChild(leftCol);
 
-        // Create Right Col (Content)
         const rightCol = create('div', { class: 'detail-content' });
 
         const header = create('div', { class: 'detail-header' });
         header.appendChild(create('h3', { class: 'detail-title' }, [p.title]));
 
-        // Links
         const linkContainer = create('div', { class: 'detail-links' });
-
-        // Smart Link Detection
         let githubUrl = p.github;
         let demoUrl = p.link;
 
-        // If no explicit github key, but link is github, treat as github
         if (!githubUrl && demoUrl && demoUrl.includes('github.com')) {
-            githubUrl = demoUrl;
-            demoUrl = null; // Don't duplicate as demo
+            githubUrl = demoUrl; demoUrl = null;
         }
 
-        // Primary Action: GitHub
         if (githubUrl) {
             const btn = create('button', { class: 'button primary' }, ['GitHub Repository']);
             btn.onclick = () => window.open(githubUrl, '_blank');
             linkContainer.appendChild(btn);
         }
-
-        // Secondary: Live Demo
         if (demoUrl) {
             const btn = create('button', { class: 'button' }, ['Live Demo']);
             btn.onclick = () => window.open(demoUrl, '_blank');
             linkContainer.appendChild(btn);
         }
-
         header.appendChild(linkContainer);
         rightCol.appendChild(header);
 
         const desc = create('div', { class: 'detail-desc', html: p.summary || p.description || '' });
         rightCol.appendChild(desc);
 
-        // Tech (if needed detailed list)
         if (p.tech) {
-            const techHeader = create('h4', { style: 'margin-top:20px; font-size:0.9rem; text-transform:uppercase; color:var(--text);' }, ['Tech Stack']);
-            rightCol.appendChild(techHeader);
-
+            rightCol.appendChild(create('h4', { style: 'margin-top:20px; font-size:0.9rem; text-transform:uppercase; color:var(--text);' }, ['Tech Stack']));
             const chips = create('div', { class: 'chips', style: 'margin-top:10px;' });
             p.tech.forEach(t => chips.appendChild(create('span', { class: 'chip' }, [t])));
             rightCol.appendChild(chips);
         }
-
         detail.appendChild(rightCol);
 
-        // Scroll to details
         setTimeout(() => {
             detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }, 100);
     }
 
-    function renderEducation() {
-        const list = byId('education-list');
-        if (!list) return;
-        d.education.forEach(e => {
-            const item = create('div', { class: 'timeline-item' });
-            item.appendChild(create('h3', {}, [e.degree]));
-            item.appendChild(create('div', { class: 'meta' }, [`${e.institution}, ${e.location} | ${e.timeline}`]));
-            if (e.gpa) item.appendChild(create('div', { class: 'meta' }, [`GPA: ${e.gpa}`]));
-            if (e.coursework) {
-                const cw = create('div', { style: 'margin-top:8px; font-size:0.85rem; color:var(--text-sec);' }, ['Coursework: ' + e.coursework.join(', ')]);
-                item.appendChild(cw);
+    // ... existing render functions ...
+
+    function initCursor() {
+        const cursor = byId('custom-cursor');
+        if (!cursor) return;
+
+        // Move cursor
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Add hover effect
+        const clickables = document.querySelectorAll('a, button, .slider-card, .chip, input, textarea');
+        clickables.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // Re-attach listeners for dynamic content? Simple global delegation is better actually
+        document.body.addEventListener('mouseover', (e) => {
+            if (e.target.closest('a, button, .slider-card, .chip, input, textarea')) {
+                cursor.classList.add('hovered');
+            } else {
+                cursor.classList.remove('hovered');
             }
-            list.appendChild(item);
-        });
-    }
-
-    function renderCerts() {
-        const list = byId('certs-list');
-        if (!list) return;
-        d.certifications.forEach(c => {
-            list.appendChild(create('li', {}, [c]));
-        });
-    }
-
-    function renderContact() {
-        // Dynamically update footer email/phone from data.js
-        const footerEmail = document.querySelector('.footer-email');
-        if (footerEmail) {
-            footerEmail.textContent = d.contact.email;
-            footerEmail.href = `mailto:${d.contact.email}`;
-        }
-
-        const footerPhone = document.querySelector('.footer-phone');
-        if (footerPhone) {
-            footerPhone.textContent = d.contact.phone;
-            footerPhone.href = `tel:${d.contact.phone}`;
-        }
-    }
-
-    function initAnimations() {
-        // Hero Animations
-        const tl = gsap.timeline();
-
-        tl.from('.mega-title', {
-            y: 100,
-            opacity: 0,
-            duration: 1.2,
-            ease: 'power4.out',
-            delay: 0.2
-        })
-            .from('.hero-img', {
-                scale: 1.2,
-                filter: 'grayscale(0%) blur(10px)',
-                duration: 1.5,
-                ease: 'power2.out'
-            }, '-=1')
-            .from('.hero-details', {
-                opacity: 0,
-                y: 20,
-                duration: 0.8
-            }, '-=0.5');
-
-        // Text reveal for sections
-        gsap.utils.toArray('h2').forEach(h2 => {
-            gsap.from(h2, {
-                scrollTrigger: {
-                    trigger: h2,
-                    start: 'top 85%',
-                },
-                x: -50,
-                opacity: 0,
-                duration: 0.8,
-                ease: 'power3.out'
-            });
         });
     }
 
     function hydrate() {
+        // ... existing hydrate code ...
         setText('brand-name', d.name);
         setText('objective', d.objective);
         setText('footer-name', d.name);
@@ -247,14 +188,6 @@
             }
         }
 
-        const statNums = document.querySelectorAll('.stat-num');
-        if (statNums.length >= 2) {
-            statNums[0].textContent = d.projects.length < 10 ? `0${d.projects.length}` : d.projects.length;
-        }
-
-        const hc = byId('header-contacts');
-        if (hc) { hc.style.display = 'none'; hc.innerHTML = ''; }
-
         const about = byId('about-text');
         if (d.aboutHtml) about.innerHTML = d.aboutHtml;
 
@@ -262,7 +195,26 @@
         renderChips('skills-ai-ml', d.skills.ai_ml);
         renderChips('skills-genai-nlp', d.skills.genai_nlp);
         renderChips('skills-tools', d.skills.tools);
-        renderProjects();
+        // Initial Render
+        renderProjects('all');
+
+        // Filter Listeners
+        const filters = document.querySelectorAll('.filter-btn');
+        filters.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filters.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Hide details if open
+                const detail = byId('project-detail');
+                if (detail) detail.classList.add('projects-hidden');
+
+                // Re-render
+                renderProjects(btn.getAttribute('data-filter'));
+            });
+        });
+
         renderEducation();
         renderCerts();
         renderContact();
@@ -274,6 +226,7 @@
         if (d.social.linkedin) socials.appendChild(create('a', { href: d.social.linkedin, target: '_blank', rel: 'noopener' }, ['LinkedIn']));
     }
 
+    // ... handleMenu ...
     function handleMenu() {
         const btn = byId('menu-toggle');
         const nav = byId('nav');
@@ -310,9 +263,8 @@
         hydrate();
         handleMenu();
         handleContactForm();
+        initCursor(); // Start cursor
         setTimeout(initAnimations, 100);
-
-        // ... click handler ...
     });
     document.addEventListener('click', (e) => {
         const slider = byId('projects-slider');

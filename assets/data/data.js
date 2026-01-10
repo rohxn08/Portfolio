@@ -27,7 +27,7 @@ const PORTFOLIO_DATA = {
     skills: {
         languages: ["Python", "C++", "SQL", "HTML5", "CSS3"],
         ai_ml: ["TensorFlow", "Keras", "Scikit-Learn", "Pandas", "NumPy", "OpenCV", "MLflow", "WandB"],
-        genai_nlp: ["Generative AI", "Hugging Face", "Prompt Engineering", "NLP", "PaddleOCR"],
+        genai_nlp: ["Generative AI", "Hugging Face", "LangChain", "Prompt Engineering", "NLP", "PaddleOCR"],
         tools: ["FastAPI", "Docker", "Git", "Streamlit", "Linux", "Tableau", "Power Bi"]
     },
     projects: [
