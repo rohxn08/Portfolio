@@ -171,6 +171,42 @@
         });
     }
 
+
+    function renderEducation() {
+        const container = byId('education-list');
+        if (!container) return;
+        d.education.forEach(edu => {
+            const item = create('div', { class: 'timeline-item' });
+
+            // Degree
+            item.appendChild(create('h3', { style: 'font-size: 1.1rem; color: var(--text); margin: 0;' }, [edu.degree]));
+
+            // Institution
+            item.appendChild(create('h4', { style: 'font-size: 0.9rem; color: var(--text-sec); margin: 0; font-weight: 500;' }, [`${edu.institution}, ${edu.location}`]));
+
+            // Meta
+            const meta = create('div', { class: 'meta' });
+            meta.appendChild(create('div', {}, [edu.timeline]));
+            meta.appendChild(create('div', { style: 'color: var(--brand); font-weight: 700; margin-top: 4px;' }, [`GPA: ${edu.gpa}`]));
+
+            if (edu.coursework) {
+                const cw = create('div', { style: 'margin-top: 8px; font-size: 0.85rem; line-height: 1.4;' }, [`Relevant Coursework: ${edu.coursework.join(', ')}`]);
+                meta.appendChild(cw);
+            }
+
+            item.appendChild(meta);
+            container.appendChild(item);
+        });
+    }
+
+    function renderCerts() {
+        const container = byId('certs-list');
+        if (!container) return;
+        d.certifications.forEach(c => {
+            container.appendChild(create('li', {}, [c]));
+        });
+    }
+
     function hydrate() {
         // ... existing hydrate code ...
         setText('brand-name', d.name);
