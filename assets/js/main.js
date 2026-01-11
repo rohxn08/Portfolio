@@ -217,18 +217,37 @@
     }
 
     function initAnimations() {
-        // GSAP ScrollTrigger could go here
+        // Hacker Text Effect on Name
+        const fname = document.getElementById('hero-fname');
+        const lname = document.getElementById('hero-lname');
+
+        // Start animation after a short delay
+        if (window.animateHackerText) {
+            window.animateHackerText(fname, "ROHAN", 2000, 200);
+            window.animateHackerText(lname, "R", 1000, 1500); // Start later for the second part
+
+            // Apply to Section Headers on Scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        // Avoid re-animating if already done (optional, but good for UX)
+                        if (!target.dataset.animated) {
+                            target.dataset.animated = "true";
+                            const originalText = target.innerText; // Use innerText to respect visible text
+                            window.animateHackerText(target, originalText, 1200, 0); // Slightly faster for headers
+                        }
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% visible
+
+            const sectionHeaders = document.querySelectorAll('.section h2');
+            sectionHeaders.forEach(h2 => observer.observe(h2));
+        }
+
+        // GSAP Animations (Other elements)
         if (typeof gsap !== 'undefined') {
-            gsap.from('.section h2', {
-                opacity: 0,
-                y: 20,
-                duration: 0.8,
-                stagger: 0.2,
-                scrollTrigger: {
-                    trigger: '.section',
-                    start: 'top 80%'
-                }
-            });
+            // Removed h2 animation to avoid conflict
         }
     }
 
