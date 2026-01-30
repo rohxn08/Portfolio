@@ -1091,13 +1091,13 @@ textarea::placeholder {
 
 .slider-card:hover {
     border-color: var(--brand);
-    transform: translateY(-4px);
+    /* transform: translateY(-4px); Removed to keep alignment */
 }
 
 .slider-card.active {
     background: var(--brand) !important;
     border-color: var(--brand);
-    transform: translateY(-6px);
+    /* transform: translateY(-6px); Removed to keep alignment */
     box-shadow: 0 12px 24px rgba(254, 61, 0, 0.25);
 }
 
@@ -1130,6 +1130,8 @@ textarea::placeholder {
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
+    height: 170px;
+    /* Fixed height for alignment */
 }
 
 .slider-card h3 {
@@ -1138,6 +1140,11 @@ textarea::placeholder {
     line-height: 1.4;
     color: var(--text);
     margin-bottom: 12px;
+    min-height: 3rem;
+    /* Enforce 2-line height alignment */
+    display: flex;
+    align-items: flex-start;
+    /* Align titles to top */
 }
 
 

@@ -31,6 +31,20 @@ const PORTFOLIO_DATA = {
     },
     projects: [
         {
+            title: "ZipRoute",
+            summary: "• <strong>AI-Powered Smart Route Optimization</strong> for delivery drivers with >10% route reduction and 87% ETA accuracy.<br>• Full-stack solution combining a <strong>FastAPI Python backend</strong> with a responsive <strong>Flutter Mobile App</strong>.<br>• Features intelligent <strong>OCR Address Extraction</strong> to automatically parse delivery destinations from images.<br>• delivers high reliability (98.5%) and low latency (<1.2s) for real-time logistics management.<br>• Comprehensive <strong>implementation documentation</strong> covering system architecture, testing suites, and performance metrics.",
+            tech: ["Python", "FastAPI", "Flutter", "OCR", "Machine Learning"],
+            link: "https://github.com/rohxn08/ZipRoute",
+            image: "assets/images/avatar_44.png"
+        },
+        {
+            title: "BrainBolt",
+            summary: "• <strong>Multimodal RAG System</strong> capable of ingesting PDFs, images, web links, and YouTube videos.<br>• Powered by <strong>Google Gemini 1.5 Pro</strong> for high-fidelity summarization and reasoning.<br>• Features a <strong>Quiz Generator</strong> that creates interactive assessments from any uploaded content.<br>• Built with a futuristic <strong>Neural Grid UI</strong> using custom HTML/CSS and a <strong>FastAPI</strong> backend.<br>• Implements <strong>FAISS vector search</strong> for millisecond-latency information retrieval.",
+            tech: ["Python", "FastAPI", "LangChain", "FAISS"],
+            link: "https://github.com/rohxn08/BrainBolt",
+            image: "assets/images/avatar_33.png"
+        },
+        {
             title: "Face Anti-Spoofing System",
             summary: "• <strong>Hybrid biometric security system</strong> combining classical LBP+SVM texture analysis and modern <strong>MobileNetV2 CNN</strong>.<br>• Features <strong>real-time webcam protection</strong> with temporal voting to stabilize predictions and eliminate flickering.<br>• Includes <strong>smart scene detection</strong> that resets logic on subject changes for instant, snappy response.<br>• Supports <strong>dual-mode analysis</strong>: high-fidelity static image verification and low-latency live video streaming.<br>• Polished <strong>Streamlit interface</strong> with visual feedback, bounding boxes, and real-time confidence scoring.",
             tech: ["Python", "OpenCV", "TensorFlow", "Scikit-Learn", "Streamlit"],
@@ -97,6 +111,21 @@ const PORTFOLIO_DATA = {
             coursework: [
                 "Machine Learning", "Data Structures in C", "Python for Data Science", "Big Data", "SQL", "Deep Learning", "DBMS"
             ]
+        },
+        {
+            degree: "Pre-University Course (PCMB)",
+            institution: "MES PU College",
+            location: "Bengaluru, Karnataka",
+            timeline: "Completed 2022",
+            gpa: "90%",
+            coursework: ["Physics", "Chemistry", "Mathematics", "Biology"]
+        },
+        {
+            degree: "Secondary School Leaving Certificate (Class X)",
+            institution: "St. Mary's High School",
+            location: "Bengaluru, Karnataka",
+            timeline: "Completed 2020",
+            gpa: "97.25%"
         }
     ],
     certifications: [
