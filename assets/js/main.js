@@ -369,10 +369,42 @@
         }
     }
 
+    function handleTheme() {
+        const toggle = byId('theme-toggle');
+        const sun = toggle ? toggle.querySelector('.sun-icon') : null;
+        const moon = toggle ? toggle.querySelector('.moon-icon') : null;
+
+        if (!toggle || !sun || !moon) return;
+
+        // Check saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            sun.style.display = 'block';
+            moon.style.display = 'none';
+        } else {
+            sun.style.display = 'none';
+            moon.style.display = 'block';
+        }
+
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+
+            // Toggle icons
+            sun.style.display = isLight ? 'block' : 'none';
+            moon.style.display = isLight ? 'none' : 'block';
+
+            // Save preference
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         hydrate();
         handleMenu();
         handleContactForm();
+        handleTheme();
         initCursor(); // Start cursor
         setTimeout(initAnimations, 100);
     });

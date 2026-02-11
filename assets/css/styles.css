@@ -15,6 +15,52 @@
     --font-body: 'Inter', sans-serif;
 }
 
+body.light-mode {
+    --bg: #FFFFFF;
+    --bg-alt: #F9F9F9;
+    --text: #111111;
+    --text-sec: #555555;
+    --muted: #666666;
+    --card: #FFFFFF;
+    --border: #E5E5E5;
+    --chip: #F0F0F0;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Mode Specific Overrides */
+body.light-mode .site-header {
+    background: rgba(255, 255, 255, 0.85);
+    /* Frosty white */
+    border-bottom: 1px solid var(--border);
+}
+
+body.light-mode .hero-sidebar {
+    background: rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .hero::before {
+    /* Lighter gradient for hero overlay */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+body.light-mode .slider-card-content {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    /* Keep dark overlay for text visibility on images */
+}
+
+/* Ensure text on dark image overlays remains white in light mode */
+body.light-mode .slider-card-content h3,
+body.light-mode .slider-card-content .slider-tag {
+    color: #fff;
+}
+
+body.light-mode .slider-tag {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -130,7 +176,31 @@ h6,
 }
 
 #theme-toggle {
-    display: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    color: var(--text);
+    transition: all 0.3s ease;
+    padding: 0;
+    margin-left: 10px;
+}
+
+#theme-toggle:hover {
+    background: var(--card);
+    border-color: var(--brand);
+    color: var(--brand);
+}
+
+#theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
 }
 
 .burger {
@@ -263,9 +333,19 @@ h6,
 .bio-text {
     font-family: var(--font-body);
     font-size: 1.1rem;
-    color: #ccc;
+    color: var(--text-sec);
     margin-bottom: 24px;
     line-height: 1.5;
+}
+
+body.light-mode .bio-role {
+    color: var(--text-sec);
+    font-weight: 600;
+}
+
+body.light-mode .bio-text {
+    color: var(--text);
+    font-weight: 500;
 }
 
 .bio-btn {
@@ -515,6 +595,87 @@ h6,
     padding: 120px 0;
     border-bottom: none;
     /* Removed section dividers */
+    background-color: var(--bg-alt);
+    position: relative;
+    z-index: 5;
+}
+
+/* About Section - Hero Style Match */
+/* About Section - Structure to match Hero */
+#about {
+    position: relative;
+    z-index: 5;
+    /* Texture Image Base */
+    background-image: url('../images/bg_texture.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Gradient handles via pseudo-element */
+    /* Ensure text is standard dark mode text default */
+    color: var(--text-sec);
+}
+
+/* Gradient Overlay via Pseudo-element */
+#about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dark Mode Gradient (Default) */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Ensure content sits above the overlay */
+#about .container {
+    position: relative;
+    z-index: 2;
+}
+
+#about h2 {
+    color: #ffffff;
+    position: relative;
+    z-index: 2;
+}
+
+#about-text {
+    color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 2;
+}
+
+#about-text strong {
+    color: #ffffff;
+}
+
+/* Light Mode Override for About */
+body.light-mode #about::before {
+    /* Strong White Gradient for Light Mode */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.95) 100%) !important;
+}
+
+body.light-mode #about {
+    /* No bg color override needed, image stays, overlay changes */
+    color: var(--text-sec) !important;
+}
+
+body.light-mode #about h2 {
+    color: #111111;
+}
+
+body.light-mode #about-text {
+    color: #111111;
+    /* Darker black for visibility */
+    text-shadow: none;
+    font-weight: 500;
+    /* Extra weight to punch through texture */
+}
+
+body.light-mode #about-text strong {
+    color: #111111;
 }
 
 .section.alt {
