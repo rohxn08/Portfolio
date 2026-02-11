@@ -6,7 +6,7 @@ const PORTFOLIO_DATA = {
     <ul style="list-style-type: none; padding: 0;">
         <li style="margin-bottom: 0.5rem;">🎓 <strong>AI & Data Science student</strong> at <strong>Global Academy of Technology</strong> (GPA: 9.48/10)</li>
         <li style="margin-bottom: 0.5rem;">🔭 Specialized in <strong>OCR, Computer Vision</strong>, and <strong>Generative AI</strong></li>
-        <li style="margin-bottom: 0.5rem;">🌱 Currently mastering <strong>Vector DB</strong> and <strong>Orchestration Frameworks</strong></li>
+        <li style="margin-bottom: 0.5rem;">🌱 <strong>Currently Interning</strong> at <strong>ABB India</strong></li>
         <li style="margin-bottom: 0.5rem;">🤝 Open to collaborating on <strong>Machine Learning, Agentic Systems</strong>, and <strong>Vision AI</strong></li>
         <li style="margin-bottom: 0.5rem;">🎮 Passionate about <strong>Technological Innovation, Video Games</strong>, and <strong>Music</strong></li>
         <li style="margin-bottom: 0.5rem;">📍 Based in <strong>Bangalore, India</strong></li>
@@ -24,10 +24,10 @@ const PORTFOLIO_DATA = {
         url: "rohan_resume.pdf" // points to PDF placed in project root
     },
     skills: {
-        languages: ["Python", "C++", "SQL", "HTML5", "CSS3"],
-        ai_ml: ["TensorFlow", "Keras", "Scikit-Learn", "Pandas", "NumPy", "OpenCV", "MLflow", "WandB"],
-        genai_nlp: ["Generative AI", "Hugging Face", "LangChain", "Prompt Engineering", "NLP", "PaddleOCR"],
-        tools: ["FastAPI", "Docker", "Git", "Streamlit", "Linux", "Tableau", "Power Bi"]
+        languages: ["Python", "C++", "C", "SQL", "Dart"],
+        ai_ml: ["TensorFlow", "Keras", "Scikit-Learn", "Pandas", "NumPy", "OpenCV", "PaddleOCR"],
+        genai_nlp: ["Hugging Face", "LangChain", "Prompt Engineering", "PaddleOCR", "LLMs", "FAISS", "SentenceTransformers"],
+        tools: ["MLflow", "FastAPI", "Docker", "Git", "Streamlit", "Linux", "Tableau", "Power Bi"]
     },
     projects: [
         {
@@ -99,6 +99,15 @@ const PORTFOLIO_DATA = {
             tech: ["Python", "Sockets", "Flask", "HTML", "CSS", "JavaScript"],
             link: "https://github.com/rohxn08/Chatting-Via-Bluetooth",
             image: "assets/images/avatar_22.png"
+        }
+    ],
+    experience: [
+        {
+            role: "Software Engineer Intern",
+            company: "ABB India",
+            location: "Bangalore, India",
+            timeline: "Feb 2026 – Current",
+            description: "<strong>OCR-based Invoice Extraction</strong> (Feb 2026 – Current)<br>• Built a robust OCR pipeline with PaddleOCR and OpenCV to extract structured text from bilingual invoices.<br>• Implemented ROI-based preprocessing, logo and barcode detection, and production-ready JSON formatting with confidence scores.<br>• Optimized speed and accuracy, handling both Chinese and English templates with automated null value filtering.<br>• Achieved an average processing time of ~2.8 seconds on CPU.<br>• Converted the solution into a standalone executable (.exe) and successfully deployed it for the Chinese ABB team.<br><br><strong>AI-based Defect Detection</strong> (In Progress)<br>• <strong>Designing</strong> a computer vision framework to automate quality control and surface defect detection on manufacturing components.<br>• <strong>Evaluating</strong> state-of-the-art object detection architectures (e.g., YOLOv8, EfficientDet) to identify anomalies with high precision.<br>• <strong>Architecting</strong> a scalable data pipeline to preprocess production line images for model training and real-time inference."
         }
     ],
     education: [

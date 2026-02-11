@@ -172,6 +172,35 @@
     }
 
 
+    function renderExperience() {
+        const container = byId('experience-list');
+        if (!container) return;
+        if (!d.experience) return;
+        d.experience.forEach(exp => {
+            const item = create('div', { class: 'timeline-item' });
+
+            // Role
+            item.appendChild(create('h3', { style: 'font-size: 1.1rem; color: var(--text); margin: 0;' }, [exp.role]));
+
+            // Company
+            item.appendChild(create('h4', { style: 'font-size: 0.9rem; color: var(--text-sec); margin: 0; font-weight: 500;' }, [`${exp.company}, ${exp.location}`]));
+
+            // Meta
+            const meta = create('div', { class: 'meta' });
+            // meta.appendChild(create('div', {}, [exp.timeline])); // Timeline is redundant if in description, but let's keep it consistent
+            meta.appendChild(create('div', { style: 'color: var(--brand); font-weight: 700; margin-top: 4px;' }, [exp.timeline]));
+
+            // Description
+            if (exp.description) {
+                const desc = create('div', { style: 'margin-top: 12px; font-size: 0.9rem; line-height: 1.6; color: var(--text-sec);', html: exp.description });
+                item.appendChild(desc);
+            }
+
+            item.appendChild(meta);
+            container.appendChild(item);
+        });
+    }
+
     function renderEducation() {
         const container = byId('education-list');
         if (!container) return;
@@ -295,6 +324,7 @@
             });
         });
 
+        renderExperience();
         renderEducation();
         renderCerts();
         renderContact();
