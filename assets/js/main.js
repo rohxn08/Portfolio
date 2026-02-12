@@ -192,7 +192,7 @@
 
             // Description
             if (exp.description) {
-                const desc = create('div', { style: 'margin-top: 12px; font-size: 0.9rem; line-height: 1.6; color: var(--text-sec);', html: exp.description });
+                const desc = create('div', { style: 'margin-top: 12px; font-size: 0.9rem; line-height: 1.6; color: var(--text-sec); font-family: var(--font-display);', html: exp.description });
                 item.appendChild(desc);
             }
 
