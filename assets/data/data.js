@@ -41,8 +41,10 @@ const PORTFOLIO_DATA = {
             title: "BrainBolt",
             summary: "• <strong>Multimodal RAG System</strong> capable of ingesting PDFs, images, web links, and YouTube videos.<br>• Powered by <strong>Google Gemini 1.5 Pro</strong> for high-fidelity summarization and reasoning.<br>• Features a <strong>Quiz Generator</strong> that creates interactive assessments from any uploaded content.<br>• Built with a futuristic <strong>Neural Grid UI</strong> using custom HTML/CSS and a <strong>FastAPI</strong> backend.<br>• Implements <strong>FAISS vector search</strong> for millisecond-latency information retrieval.",
             tech: ["Python", "FastAPI", "LangChain", "FAISS"],
-            link: "https://github.com/rohxn08/BrainBolt",
-            image: "assets/images/avatar_33.png"
+            link: "https://rohxn08-brain-bolt.hf.space",
+            github: "https://github.com/rohxn08/BrainBolt",
+            image: "assets/images/avatar_33.png",
+            iframeDemo: "https://rohxn08-brain-bolt.hf.space"
         },
         {
             title: "Face Anti-Spoofing System",

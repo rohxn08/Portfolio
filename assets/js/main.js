@@ -67,9 +67,24 @@
 
         const tags = create('div', { class: 'slider-tags' });
         if (p.tech) {
-            p.tech.slice(0, 3).forEach(t => tags.appendChild(create('span', { class: 'slider-tag' }, [t])));
+            // Remove FastAPI and limit to 2 tags if there's an iframe demo to make room for the button
+            let techList = p.iframeDemo ? p.tech.filter(t => t.toLowerCase() !== 'fastapi').slice(0, 2) : p.tech.slice(0, 3);
+            techList.forEach(t => tags.appendChild(create('span', { class: 'slider-tag' }, [t])));
+        }
+
+        if (p.iframeDemo) {
+            const tryItBtn = create('button', { class: 'slider-try-btn' }, ['Try it here ⚡']);
+            tryItBtn.onclick = (e) => {
+                e.stopPropagation(); // prevent card click
+                const siblings = isSlider ? container.children : container.parentElement.querySelectorAll('.slider-card');
+                Array.from(siblings).forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                showProjectDemo(p);
+            };
+            tags.appendChild(tryItBtn);
         }
         content.appendChild(tags);
+
         card.appendChild(content);
 
         // Click event
@@ -92,6 +107,7 @@
         const detail = byId('project-detail');
         if (!detail) return;
         detail.classList.remove('projects-hidden');
+        detail.style.display = ''; // Reset CSS grid
         detail.innerHTML = '';
 
         const leftCol = create('div', { class: 'detail-avatar-wrapper' });
@@ -113,14 +129,23 @@
             githubUrl = demoUrl; demoUrl = null;
         }
 
+        linkContainer.style.display = 'flex';
+        linkContainer.style.gap = '10px';
+        linkContainer.style.flexWrap = 'wrap';
+
         if (githubUrl) {
-            const btn = create('button', { class: 'button primary' }, ['GitHub Repository']);
+            const btn = create('button', { class: 'button' }, ['GitHub Repository']);
             btn.onclick = () => window.open(githubUrl, '_blank');
             linkContainer.appendChild(btn);
         }
         if (demoUrl) {
             const btn = create('button', { class: 'button' }, ['Live Demo']);
             btn.onclick = () => window.open(demoUrl, '_blank');
+            linkContainer.appendChild(btn);
+        }
+        if (p.iframeDemo) {
+            const btn = create('button', { class: 'button primary' }, ['Try it here ⚡']);
+            btn.onclick = () => showProjectDemo(p);
             linkContainer.appendChild(btn);
         }
         header.appendChild(linkContainer);
@@ -398,6 +423,34 @@
             // Save preference
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
+    }
+
+    function showProjectDemo(p) {
+        const detail = byId('project-detail');
+        if (!detail) return;
+
+        detail.classList.remove('projects-hidden');
+        detail.style.display = 'block'; // Block so it fills the width instead of grid
+        detail.innerHTML = '';
+
+        const header = create('div', { class: 'detail-header', style: 'display: flex; justify-content: space-between; align-items: center; border-bottom: none; padding-bottom: 20px;' });
+        header.appendChild(create('h3', { class: 'detail-title', style: 'margin-bottom: 0;' }, [p.title + ' - Live Demo']));
+
+        const backBtn = create('button', { class: 'button' }, ['← Back to Details']);
+        backBtn.onclick = () => {
+            // Let's force a re-render of details
+            showProjectDetails(p);
+        };
+        header.appendChild(backBtn);
+        detail.appendChild(header);
+
+        const iframeContainer = create('div', { class: 'brainbolt-container', style: 'margin-top: 20px;' });
+        iframeContainer.innerHTML = `<iframe src="${p.iframeDemo}" frameborder="0" width="100%" height="100%" allow="clipboard-write;"></iframe>`;
+        detail.appendChild(iframeContainer);
+
+        setTimeout(() => {
+            detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
     }
 
     document.addEventListener('DOMContentLoaded', function () {
