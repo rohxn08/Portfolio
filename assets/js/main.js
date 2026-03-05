@@ -444,8 +444,8 @@
         header.appendChild(backBtn);
         detail.appendChild(header);
 
-        const iframeContainer = create('div', { class: 'brainbolt-container', style: 'margin-top: 20px;' });
-        iframeContainer.innerHTML = `<iframe src="${p.iframeDemo}" frameborder="0" width="100%" height="100%" allow="clipboard-write;"></iframe>`;
+        const iframeContainer = create('div', { class: 'brainbolt-container', style: 'margin-top: 20px; width: 100%; height: 85vh; min-height: 700px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);' });
+        iframeContainer.innerHTML = `<iframe src="${p.iframeDemo}" frameborder="0" width="100%" height="100%" allow="clipboard-write; camera; microphone;" style="background: var(--bg); display: block;"></iframe>`;
         detail.appendChild(iframeContainer);
 
         setTimeout(() => {

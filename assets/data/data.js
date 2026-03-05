@@ -44,7 +44,7 @@ const PORTFOLIO_DATA = {
             link: "https://rohxn08-brain-bolt.hf.space",
             github: "https://github.com/rohxn08/BrainBolt",
             image: "assets/images/avatar_33.png",
-            iframeDemo: "https://rohxn08-brain-bolt.hf.space"
+            iframeDemo: "https://rohxn08-brain-bolt.hf.space/?portfolio=true"
         },
         {
             title: "Face Anti-Spoofing System",
