@@ -34,8 +34,10 @@ const PORTFOLIO_DATA = {
             title: "ZipRoute",
             summary: "• <strong>AI-Powered Smart Route Optimization</strong> for delivery drivers with >10% route reduction and 87% ETA accuracy.<br>• Full-stack solution combining a <strong>FastAPI Python backend</strong> with a responsive <strong>Flutter Mobile App</strong>.<br>• Features intelligent <strong>OCR Address Extraction</strong> to automatically parse delivery destinations from images.<br>• delivers high reliability (98.5%) and low latency (<1.2s) for real-time logistics management.<br>• Comprehensive <strong>implementation documentation</strong> covering system architecture, testing suites, and performance metrics.",
             tech: ["Python", "FastAPI", "Flutter", "OCR", "Machine Learning"],
-            link: "https://github.com/rohxn08/ZipRoute",
-            image: "assets/images/avatar_44.png"
+            link: "assets/projects/ziproute/index.html",
+            github: "https://github.com/rohxn08/ZipRoute",
+            image: "assets/images/avatar_44.png",
+            iframeDemo: "assets/projects/ziproute/index.html"
         },
         {
             title: "BrainBolt",
