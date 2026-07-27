@@ -328,6 +328,7 @@
         renderChips('skills-languages', d.skills.languages);
         renderChips('skills-ai-ml', d.skills.ai_ml);
         renderChips('skills-genai-nlp', d.skills.genai_nlp);
+        renderChips('skills-agentic-ai', d.skills.agentic_ai);
         renderChips('skills-tools', d.skills.tools);
         // Initial Render
         renderProjects('all');

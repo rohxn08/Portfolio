@@ -25,9 +25,10 @@ const PORTFOLIO_DATA = {
     },
     skills: {
         languages: ["Python", "C++", "C", "SQL", "Dart"],
-        ai_ml: ["TensorFlow", "Keras", "Scikit-Learn", "Pandas", "NumPy", "OpenCV", "PaddleOCR"],
-        genai_nlp: ["Hugging Face", "LangChain", "Prompt Engineering", "PaddleOCR", "LLMs", "FAISS", "SentenceTransformers"],
-        tools: ["MLflow", "FastAPI", "Docker", "Git", "Streamlit", "Linux", "Tableau", "Power Bi"]
+        ai_ml: ["TensorFlow", "PyTorch", "Keras", "Scikit-Learn", "XGBoost", "Pandas", "NumPy", "Matplotlib", "OpenCV", "MediaPipe", "YOLO"],
+        genai_nlp: ["Hugging Face", "LLMs", "FAISS", "SentenceTransformers", "Qdrant", "PaddleOCR"],
+        agentic_ai: ["LangChain", "Mem0", "Langfuse", "Pydantic", "Prompt Engineering"],
+        tools: ["MLflow", "FastAPI", "Docker", "Git", "Streamlit", "Linux", "Tableau", "Power Bi", "Redis"]
     },
     projects: [
         {
@@ -106,6 +107,13 @@ const PORTFOLIO_DATA = {
         }
     ],
     experience: [
+        {
+            role: "AI Engineer Intern",
+            company: "Kenpath",
+            location: "Bangalore, India",
+            timeline: "Jul 2026 – Present",
+            description: "<strong>Apoorva Lens - Agentic AI Personalization</strong> (Jul 2026 – Present)<br>• Engineered the personalization and memory layer for an Agentic AI societal platform using <strong>Mem0 (mem0ai)</strong> and <strong>Redis</strong> to track and persist user preferences across sessions.<br>• Designed a multi-session voting algorithm that caches session-level preferences in <strong>Redis</strong> and upserts user profiles to <strong>Qdrant</strong>, automatically consolidating preferences after every 5 sessions based on frequency or recency.<br>• Developed a routing pipeline using a specialized mini-agent to parse user prompts, map them to specific archetypes, and relay query context to the main agent for analysis of societal and economic factors.<br>• Integrated customized context controls in the UI, enabling users to choose representation profiles (NGO, MLA, Government Official), toggle database access (Public vs. Private), and adjust reasoning depth (Quick, Medium, Deep Dive).<br>• Implemented a system-prompt filtration layer for <strong>Mem0</strong> to validate memory updates, and configured telemetry and tracing workflows via <strong>Langfuse</strong>."
+        },
         {
             role: "Software Engineer Intern",
             company: "ABB India",
