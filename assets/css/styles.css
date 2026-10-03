@@ -348,7 +348,6 @@ html.preloading body {
 .pl-stage {
     display: grid;
     place-items: center;
-    perspective: 700px;
     transition: transform .8s var(--ease), opacity .5s;
 }
 
@@ -358,45 +357,76 @@ html.preloading body {
 }
 
 .cube {
-    --s: clamp(56px, 6vw, 84px);
-    position: relative;
+    /* Three slabs stacked into one cube; they twist in turn around the
+       stacking axis, break apart, then lock back together. */
+    --s: clamp(64px, 6.4vw, 92px);
+    --d: calc(var(--s) / 3);
     width: var(--s);
     height: var(--s);
+    perspective: 900px;
+    filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .6));
+}
+
+.rig {
+    position: relative;
+    width: 100%;
+    height: 100%;
     transform-style: preserve-3d;
-    animation: cube-spin 6s cubic-bezier(.65, 0, .35, 1) infinite;
+    transform: rotateX(-32deg) rotateY(48deg);
+    animation: rig-sway 7.2s ease-in-out infinite;
 }
 
-@keyframes cube-spin {
-    0% { transform: rotateX(-24deg) rotateY(35deg); }
-    50% { transform: rotateX(-24deg) rotateY(215deg); }
-    100% { transform: rotateX(-24deg) rotateY(395deg); }
+@keyframes rig-sway {
+    0%, 100% { transform: rotateX(-32deg) rotateY(48deg); }
+    50% { transform: rotateX(-26deg) rotateY(36deg); }
 }
 
-.cf {
+.slab {
     position: absolute;
     inset: 0;
-    background: linear-gradient(145deg, #8d8d92, #4b4b50 60%, #2a2a2d);
-    border: 1px solid rgba(255, 255, 255, .08);
-    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    animation: twist 3.6s cubic-bezier(.7, 0, .25, 1) infinite;
 }
 
-.cf.front { transform: translateZ(calc(var(--s) / 2)); }
-.cf.back { transform: rotateY(180deg) translateZ(calc(var(--s) / 2)); }
-.cf.right { transform: rotateY(90deg) translateZ(calc(var(--s) / 2)); background: linear-gradient(145deg, #5b5b60, #2c2c30); }
-.cf.left { transform: rotateY(-90deg) translateZ(calc(var(--s) / 2)); background: linear-gradient(145deg, #5b5b60, #2c2c30); }
-.cf.top { transform: rotateX(90deg) translateZ(calc(var(--s) / 2)); background: linear-gradient(145deg, #c9c9ce, #8a8a90); }
-.cf.bottom { transform: rotateX(-90deg) translateZ(calc(var(--s) / 2)); background: #1a1a1d; }
+/* back → front along Z, each a third of the cube */
+.slab.s1 { --c: #5d5d62; --hi: #74747a; --lo: #3e3e42; transform: translateZ(calc(var(--d) * -1)); animation-delay: 0s; }
+.slab.s2 { --c: #9c9ca1; --hi: #b9b9be; --lo: #6f6f74; transform: translateZ(0); animation-delay: .14s; }
+.slab.s3 { --c: #151517; --hi: #2a2a2e; --lo: #0b0b0c; transform: translateZ(var(--d)); animation-delay: .28s; }
 
-.cf.front b {
+@keyframes twist {
+    0%, 18% { rotate: z 0deg; }
+    42%, 58% { rotate: z 90deg; }
+    82%, 100% { rotate: z 180deg; }
+}
+
+.sf {
     position: absolute;
-    left: 58%;
+    left: 50%;
+    top: 50%;
+    background: var(--c);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05);
+}
+
+/* front/back: s × s, top/bottom: s × d, left/right: d × s */
+.sf.f, .sf.b { width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2); }
+.sf.f { transform: translateZ(calc(var(--d) / 2)); }
+.sf.b { transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); background: var(--lo); }
+.sf.t, .sf.u { width: var(--s); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--s) / -2); }
+.sf.t { transform: rotateX(90deg) translateZ(calc(var(--s) / 2)); background: var(--hi); }
+.sf.u { transform: rotateX(-90deg) translateZ(calc(var(--s) / 2)); background: var(--lo); }
+.sf.l, .sf.r { width: var(--d); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--d) / -2); }
+.sf.l { transform: rotateY(-90deg) translateZ(calc(var(--s) / 2)); }
+.sf.r { transform: rotateY(90deg) translateZ(calc(var(--s) / 2)); background: var(--lo); }
+
+.slab.s3 .sf.f b {
+    position: absolute;
+    left: 56%;
     top: 58%;
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background: var(--brand);
     box-shadow: 0 0 10px var(--brand);
-    animation: blink 1.4s steps(2) infinite;
 }
 
 .pl-foot {
