@@ -282,6 +282,8 @@
             grid.replaceChildren(...visible.map(({ p, i }, k) => projectCell(p, i, k, animate)));
             more.hidden = !(!filtering && !showAll && all.length > PREVIEW_COUNT);
             $('span', more).textContent = `Show all ${all.length} projects`;
+            $('#pack-count').innerHTML = `Showing <b>${pad(visible.length)}</b> of ${pad(d.projects.length)}` +
+                (filtering ? ` · ${selectedCats.size} filter${selectedCats.size > 1 ? 's' : ''}` : '');
             observeReveals(grid);
         };
         if (animate && document.startViewTransition && !reduceMotion) document.startViewTransition(draw);

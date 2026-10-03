@@ -1463,29 +1463,6 @@ html.preloading body {
 
 /* --------------------------------------------------------- projects pack */
 
-.crosshair {
-    position: absolute;
-    left: 50%;
-    top: 40px;
-    width: 28px;
-    height: 28px;
-    transform: translateX(-50%);
-}
-
-.crosshair::before,
-.crosshair::after {
-    content: '';
-    position: absolute;
-    background: var(--line-2);
-}
-
-.crosshair::before { left: 50%; top: 0; bottom: 0; width: 1px; }
-.crosshair::after { top: 50%; left: 0; right: 0; height: 1px; }
-
-#projects {
-    padding-top: 220px;
-}
-
 /* ---- project intro (see playProjectIntro) */
 .pack-grid.intro-pending .pack-cell {
     opacity: 1;
@@ -1544,19 +1521,26 @@ html.preloading body {
 
 .pack-head {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding-bottom: 14px;
+    padding: 18px 0;
 }
 
-.pack-title {
+.pack-count {
     margin: 0;
-    font-size: clamp(20px, 1.9vw, 28px);
-    font-weight: 500;
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    white-space: nowrap;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: clamp(13px, 1.1vw, 17px);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--muted);
+}
+
+.pack-count b {
+    color: var(--brand);
+    font-weight: 900;
 }
 
 .pack-actions {
@@ -2573,9 +2557,6 @@ html.preloading body {
         max-width: 220px;
     }
 
-    #projects {
-        padding-top: 140px;
-    }
 
     .pack-grid {
         grid-template-columns: 1fr;
