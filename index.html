@@ -147,7 +147,7 @@
         <span class="ln"><span><b class="bar"></b>WORK</span></span>
         <span class="tr-num">/02</span>
       </h2>
-      <div class="rail"><span><i class="dot"></i>©02</span><span><i class="dot"></i>(Where I've worked)</span><span>©2026</span></div>
+      <div class="rail rail-lg"><span><i class="dot"></i>©02</span><span><i class="dot"></i>(Where I've worked)</span><span>©2026</span></div>
       <div class="xp-grid" id="experience-list"></div>
     </section>
 
@@ -156,8 +156,19 @@
       <div class="crosshair" aria-hidden="true"></div>
       <div class="pack-head">
         <h2 class="pack-title">©003 Pack<br>– Project Squad</h2>
-        <div class="filters" id="project-filters" role="tablist" aria-label="Filter projects"></div>
-        <a href="#skills" class="round-btn" aria-label="Skip to toolkit">↓</a>
+        <div class="pack-actions">
+          <div class="filter-wrap">
+            <button class="filter-btn" id="filter-toggle" aria-expanded="false" aria-controls="filter-panel" aria-label="Filter projects by category">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8.5V19l-4 2v-7.5z" /></svg>
+              <span class="fb-count" id="filter-count" hidden></span>
+            </button>
+            <div class="filter-panel" id="filter-panel" role="group" aria-label="Project categories" hidden>
+              <p class="fp-head"><span>Filter</span><button class="fp-clear" id="filter-clear" type="button">Clear</button></p>
+              <div class="fp-list" id="project-filters"></div>
+            </div>
+          </div>
+          <a href="#skills" class="round-btn" aria-label="Skip to toolkit">↓</a>
+        </div>
       </div>
       <div class="pack-grid" id="project-grid"></div>
       <div class="center">

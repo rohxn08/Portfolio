@@ -219,7 +219,8 @@
 
     // ------------------------------------------------------------ projects
     const PREVIEW_COUNT = 6;
-    let projectFilter = 'all', showAll = false;
+    const selectedCats = new Set(); // empty = every category
+    let showAll = false;
 
     function projectLinks(p) {
         let github = p.github, live = p.link;
@@ -234,33 +235,51 @@
     }
 
     function renderFilters() {
-        const wrap = $('#project-filters');
-        const cats = d.projectCategories || {};
-        const opts = [['all', 'All']].concat(Object.entries(cats).filter(([k]) => d.projects.some(p => p.category === k)));
-        opts.forEach(([key, label]) => {
-            const count = key === 'all' ? d.projects.length : d.projects.filter(p => p.category === key).length;
-            wrap.appendChild(el('button', {
-                class: 'pill filter' + (key === 'all' ? ' active' : ''), role: 'tab', 'aria-selected': key === 'all' ? 'true' : 'false',
-                onclick: (e) => {
-                    projectFilter = key;
-                    $$('.filter', wrap).forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-                    e.currentTarget.classList.add('active');
-                    e.currentTarget.setAttribute('aria-selected', 'true');
-                    renderProjects(true);
-                }
-            }, [label, el('sup', { text: count })]));
+        const list = $('#project-filters');
+        const btn = $('#filter-toggle'), panel = $('#filter-panel'), badge = $('#filter-count');
+        const cats = Object.entries(d.projectCategories || {}).filter(([k]) => d.projects.some(p => p.category === k));
+
+        const sync = () => {
+            badge.hidden = !selectedCats.size;
+            badge.textContent = selectedCats.size;
+            btn.classList.toggle('has-filter', selectedCats.size > 0);
+            renderProjects(true);
+        };
+        cats.forEach(([key, label]) => {
+            const count = d.projects.filter(p => p.category === key).length;
+            const box = el('input', {
+                type: 'checkbox', value: key,
+                onchange: (e) => { e.target.checked ? selectedCats.add(key) : selectedCats.delete(key); sync(); },
+            });
+            list.appendChild(el('label', { class: 'fp-item' }, [box, el('span', { text: label }), el('sup', { text: count })]));
         });
+        $('#filter-clear').addEventListener('click', () => {
+            selectedCats.clear();
+            $$('input', list).forEach(b => { b.checked = false; });
+            sync();
+        });
+
+        const setOpen = (open) => {
+            panel.hidden = !open;
+            btn.setAttribute('aria-expanded', open);
+            btn.classList.toggle('open', open);
+            if (open) $('input', list).focus({ preventScroll: true });
+        };
+        btn.addEventListener('click', () => setOpen(panel.hidden));
+        document.addEventListener('click', (e) => { if (!panel.hidden && !e.target.closest('.filter-wrap')) setOpen(false); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { setOpen(false); btn.focus(); } });
     }
 
     function renderProjects(animate) {
         const grid = $('#project-grid');
         const more = $('#projects-more');
-        const all = d.projects.map((p, i) => ({ p, i })).filter(({ p }) => projectFilter === 'all' || p.category === projectFilter);
-        const visible = projectFilter === 'all' && !showAll ? all.slice(0, PREVIEW_COUNT) : all;
+        const filtering = selectedCats.size > 0;
+        const all = d.projects.map((p, i) => ({ p, i })).filter(({ p }) => !filtering || selectedCats.has(p.category));
+        const visible = !filtering && !showAll ? all.slice(0, PREVIEW_COUNT) : all;
 
         const draw = () => {
             grid.replaceChildren(...visible.map(({ p, i }, k) => projectCell(p, i, k, animate)));
-            more.hidden = !(projectFilter === 'all' && !showAll && all.length > PREVIEW_COUNT);
+            more.hidden = !(!filtering && !showAll && all.length > PREVIEW_COUNT);
             $('span', more).textContent = `Show all ${all.length} projects`;
             observeReveals(grid);
         };
@@ -278,7 +297,7 @@
             onkeydown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(p); } },
         }, [
             el('div', { class: 'pc-stage' }, [
-                el('span', { class: 'pc-num', text: `${pad(i + 1)}.` }),
+                el('span', { class: 'pc-num', text: `/${pad(i + 1, 3)}` }),
                 p.iframeDemo ? el('button', {
                     class: 'pc-live', 'aria-label': `Open ${p.title} live demo`,
                     html: '<i class="dot"></i>Live demo',
