@@ -279,7 +279,12 @@
         }, [
             el('div', { class: 'pc-stage' }, [
                 el('span', { class: 'pc-num', text: `${pad(i + 1)}.` }),
-                p.iframeDemo ? el('span', { class: 'pc-live', text: '● Live demo' }) : null,
+                p.iframeDemo ? el('button', {
+                    class: 'pc-live', 'aria-label': `Open ${p.title} live demo`,
+                    html: '<i class="dot"></i>Live demo',
+                    onclick: (e) => { e.stopPropagation(); openDemo(p); },
+                    onkeydown: (e) => e.stopPropagation(),
+                }) : null,
                 el('div', { class: 'pack-frame' }, [el('img', { src: p.image, alt: '', loading: 'lazy' })]),
                 el('h3', { class: 'pc-title', text: p.title }),
                 el('i', { class: 'dot pc-dl' }), el('i', { class: 'dot pc-dr' }),

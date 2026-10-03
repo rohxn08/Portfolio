@@ -1332,11 +1332,41 @@ button {
 .pc-live {
     position: absolute;
     right: 18px;
-    top: 24px;
-    font-size: 10px;
-    color: var(--brand);
+    top: 16px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: var(--text);
+    color: #000;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: 0;
+    transition: background .3s, color .3s, transform .4s var(--ease);
+}
+
+.pc-live .dot {
+    width: 6px;
+    height: 6px;
+    margin-right: 8px;
+    background: var(--brand);
+}
+
+.pc-live:hover,
+.pc-live:focus-visible {
+    background: var(--brand);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.pc-live:hover .dot,
+.pc-live:focus-visible .dot {
+    background: #fff;
 }
 
 .pc-stage .pack-frame {
