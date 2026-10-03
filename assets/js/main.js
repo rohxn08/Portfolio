@@ -559,16 +559,6 @@
         $$('[data-phone]').forEach(a => { a.href = `tel:${(c.phone || '').replace(/\s/g, '')}`; a.textContent = c.phone; });
         $$('[data-github]').forEach(a => { a.href = s.github; });
 
-        const follow = $('#follow-list');
-        [
-            s.github && ['GitHub', s.github],
-            s.linkedin && ['LinkedIn', s.linkedin],
-            d.resume && d.resume.url && ['Resume (PDF)', d.resume.url],
-            c.email && ['Email', `mailto:${c.email}`],
-        ].filter(Boolean).forEach(([label, href]) => follow.appendChild(el('li', {}, [
-            el('a', { href, target: href.startsWith('mailto') ? null : '_blank', rel: 'noopener', text: label }),
-        ])));
-
         $('#contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const f = new FormData(e.currentTarget);
