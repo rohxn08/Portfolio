@@ -587,33 +587,32 @@ button {
     grid-row: 1 / 3;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 36px;
-    padding: 92px 0 32px;
+    justify-content: flex-start;
+    gap: clamp(28px, 4vh, 48px);
+    padding: 84px 0 32px;
     min-width: 0;
 }
 
 /* Product-pack strip */
 .pack-strip {
-    overflow: hidden;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
     margin-right: calc(var(--gutter) * -1);
-    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
-    mask-image: linear-gradient(90deg, #000 85%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, #000 88%, transparent);
+}
+
+.pack-strip::-webkit-scrollbar {
+    display: none;
 }
 
 .strip-track {
     display: flex;
     gap: 10px;
     width: max-content;
-    animation: strip 38s linear infinite;
-}
-
-.pack-strip:hover .strip-track {
-    animation-play-state: paused;
-}
-
-@keyframes strip {
-    to { transform: translateX(calc(-50% - 5px)); }
+    padding-right: var(--gutter);
 }
 
 .pack {
@@ -622,7 +621,28 @@ button {
 }
 
 .pack-sm {
-    width: clamp(150px, 13vw, 210px);
+    /* Two and a half cards fill the hero's right column, like the template. */
+    width: clamp(220px, calc((50vw - var(--gutter)) / 2.55), 420px);
+    scroll-snap-align: start;
+}
+
+.pack-sm .pack-frame {
+    aspect-ratio: 1 / 1.06;
+    transition: border-color .4s;
+}
+
+.pack-sm .pack-frame img {
+    object-fit: contain;
+    padding: 4% 8%;
+}
+
+.pack-sm:hover .pack-frame,
+.pack-sm:focus-visible .pack-frame {
+    border-color: var(--line-2);
+}
+
+.pack-sm:hover figcaption span:last-child {
+    color: var(--brand);
 }
 
 .pack-frame {
@@ -2079,7 +2099,4 @@ button {
         scroll-behavior: auto !important;
     }
 
-    .strip-track {
-        animation: none;
-    }
 }
