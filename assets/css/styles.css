@@ -2599,6 +2599,11 @@ html.preloading body {
         font-size: clamp(40px, 15.5vw, 96px);
     }
 
+    /* "INTELLIGENT" is the longest title word; keep it on screen */
+    .title-long {
+        font-size: 10.2vw;
+    }
+
     .cf-row {
         grid-template-columns: 1fr;
     }
