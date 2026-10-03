@@ -1298,16 +1298,15 @@ button {
     line-height: .92;
     text-transform: uppercase;
     letter-spacing: -0.02em;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity .5s, transform .7s var(--ease);
+    color: var(--soft);
+    transition: color .35s, transform .7s var(--ease);
     text-shadow: 0 2px 24px #000;
 }
 
 .pack-cell:hover .pc-title,
 .pack-cell:focus-visible .pc-title {
-    opacity: 1;
-    transform: none;
+    color: var(--brand);
+    transform: translateX(6px);
 }
 
 .pc-dl,
@@ -1996,11 +1995,6 @@ button {
 
     .pack-grid {
         grid-template-columns: 1fr;
-    }
-
-    .pc-title {
-        opacity: 1;
-        transform: none;
     }
 
     .pc-stage {
