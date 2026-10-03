@@ -498,11 +498,50 @@ button {
     isolation: isolate;
 }
 
-.hero-canvas {
+.hero-bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 66%;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 45%, transparent 98%), linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, #000 45%, transparent 98%), linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+    mask-composite: intersect;
+}
+
+.hero-bg-img {
+    position: absolute;
+    inset: -4%;
+    background: url('../images/bg_texture.png') 30% 40% / cover no-repeat;
+    filter: grayscale(1) contrast(1.15) brightness(.95);
+    transform: translate(var(--px, 0), var(--py, 0)) scale(1.06);
+    transition: transform 1.2s var(--ease);
+    animation: drift 18s ease-in-out infinite alternate, flicker 6s steps(1) infinite;
+}
+
+@keyframes drift {
+    from { scale: 1; }
+    to { scale: 1.08; }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    47% { opacity: .92; }
+    48% { opacity: 1; }
+    83% { opacity: .95; }
+}
+
+.hero-bg::after {
+    /* Horizontal glitch lines over the photo */
+    content: '';
     position: absolute;
     inset: 0;
-    z-index: -2;
-    cursor: crosshair;
+    background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .35) 0 1px, transparent 1px 4px);
+    mix-blend-mode: multiply;
 }
 
 .scanlines {
@@ -566,22 +605,6 @@ button {
     pointer-events: none;
 }
 
-.hero-hud {
-    position: absolute;
-    left: 56px;
-    bottom: 16px;
-    display: flex;
-    gap: 18px;
-    font-size: 10px;
-    letter-spacing: .06em;
-    color: var(--muted);
-    text-transform: uppercase;
-}
-
-.hero-hud #hud-name {
-    color: var(--soft);
-}
-
 .hero-side {
     grid-column: 2;
     grid-row: 1 / 3;
@@ -595,24 +618,26 @@ button {
 
 /* Product-pack strip */
 .pack-strip {
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
+    overflow: hidden;
     margin-right: calc(var(--gutter) * -1);
     -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
     mask-image: linear-gradient(90deg, #000 88%, transparent);
-}
-
-.pack-strip::-webkit-scrollbar {
-    display: none;
 }
 
 .strip-track {
     display: flex;
     gap: 10px;
     width: max-content;
-    padding-right: var(--gutter);
+    animation: strip 40s linear infinite;
+}
+
+.pack-strip:hover .strip-track,
+.pack-strip:focus-within .strip-track {
+    animation-play-state: paused;
+}
+
+@keyframes strip {
+    to { transform: translateX(calc(-50% - 5px)); }
 }
 
 .pack {
@@ -623,7 +648,6 @@ button {
 .pack-sm {
     /* Two and a half cards fill the hero's right column, like the template. */
     width: clamp(220px, calc((50vw - var(--gutter)) / 2.55), 420px);
-    scroll-snap-align: start;
 }
 
 .pack-sm .pack-frame {
@@ -1933,8 +1957,9 @@ button {
         min-height: 0;
     }
 
-    .hero-hud {
-        left: 0;
+    .hero-bg {
+        width: 100%;
+        opacity: .7;
     }
 
     .hero-side {
@@ -2089,6 +2114,11 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .strip-track,
+    .hero-bg-img {
+        animation: none;
+    }
+
     *,
     *::before,
     *::after {

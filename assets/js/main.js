@@ -68,25 +68,29 @@
         const strip = $('#hero-strip');
         const picks = d.projects.filter(p => p.image).slice(0, 4);
         const track = el('div', { class: 'strip-track' });
-        picks.forEach((p, k) => {
-            const card = packCard(p, k, true);
-            card.tabIndex = 0;
-            card.setAttribute('role', 'button');
-            card.setAttribute('aria-label', `${p.title}: open details`);
+        // Doubled so the strip can loop seamlessly; the copy is hidden from assistive tech.
+        [...picks, ...picks].forEach((p, k) => {
+            const card = packCard(p, k % picks.length, true);
+            if (k >= picks.length) card.setAttribute('aria-hidden', 'true');
+            else {
+                card.tabIndex = 0;
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `${p.title}: open details`);
+                card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(p); } });
+            }
             card.addEventListener('click', () => openProject(p));
-            card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(p); } });
             track.appendChild(card);
         });
         strip.appendChild(track);
-        // Vertical wheel scrolls the strip sideways while it still has room to move.
-        strip.addEventListener('wheel', (e) => {
-            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-            const max = strip.scrollWidth - strip.clientWidth;
-            if ((e.deltaY > 0 && strip.scrollLeft < max - 1) || (e.deltaY < 0 && strip.scrollLeft > 0)) {
-                e.preventDefault();
-                strip.scrollLeft += e.deltaY;
-            }
-        }, { passive: false });
+
+        // Gentle parallax on the hero photo.
+        const bg = $('.hero-bg-img');
+        if (bg && finePointer && !reduceMotion) {
+            $('#hero').addEventListener('pointermove', (e) => {
+                bg.style.setProperty('--px', ((e.clientX / innerWidth - 0.5) * -24).toFixed(1) + 'px');
+                bg.style.setProperty('--py', ((e.clientY / innerHeight - 0.5) * -16).toFixed(1) + 'px');
+            });
+        }
 
         const social = $('#hero-social');
         const links = [
