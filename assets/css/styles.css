@@ -1626,28 +1626,13 @@ button {
 
 /* ------------------------------------------------------------ spec lists */
 
-.spec-head {
-    display: grid;
-    grid-template-columns: var(--col) 1fr auto;
-    align-items: center;
-    border-top: 1px solid var(--line);
-    padding: 12px 0;
-    font-size: 13px;
-    color: var(--muted);
-}
-
-.spec-head span:nth-child(2) {
-    color: var(--soft);
-}
-
 .manifesto {
     position: relative;
-    margin: 100px 0 120px;
+    margin: 70px 0 90px;
     font-size: clamp(28px, 4.1vw, 68px);
     line-height: .98;
     letter-spacing: -0.035em;
     color: var(--muted);
-    padding: 0 0 0 0;
 }
 
 .manifesto .indent {
@@ -1661,9 +1646,12 @@ button {
     top: .32em;
 }
 
-.m-year {
-    float: right;
-    margin-top: .2em;
+/* Toolkit / education / certifications share the work-section type */
+.spec-list,
+.award-list {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    letter-spacing: -0.01em;
 }
 
 .spec-list {
@@ -1672,29 +1660,36 @@ button {
 
 .spec-row {
     display: grid;
-    grid-template-columns: var(--col) minmax(180px, 300px) 1fr 12px;
-    align-items: start;
+    grid-template-columns: calc(var(--col) + 20px) minmax(200px, 340px) 1fr 12px;
+    align-items: center;
     gap: 0 12px;
-    padding: 22px 0;
+    padding: 24px 0;
     border-top: 1px solid var(--line);
 }
 
 .spec-num,
-.spec-label {
-    font-size: clamp(18px, 1.6vw, 22px);
-    font-weight: 400;
-    margin: 0;
-    line-height: 1.2;
+.aw-num {
+    font-weight: 900;
+    font-size: clamp(22px, 2.1vw, 34px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--brand);
 }
 
-.spec-num {
-    color: var(--muted);
+.spec-label {
+    margin: 0;
+    font-size: clamp(15px, 1.4vw, 22px);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
 }
 
 .spec-row .pill {
     height: 34px;
-    font-size: 13px;
     padding: 0 16px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .spec-row .pill:hover {
@@ -1702,31 +1697,39 @@ button {
     color: var(--text);
 }
 
-.spec-row .dot.end {
-    margin-top: 8px;
-}
-
 .award-list {
     list-style: none;
-    margin: 12px 0 100px;
+    margin: 0 0 40px;
     padding: 0;
+    border-bottom: 1px solid var(--line);
 }
 
 .award-list li {
     display: grid;
-    grid-template-columns: var(--col) 1fr auto;
+    grid-template-columns: calc(var(--col) + 20px) 1fr auto;
+    align-items: center;
     gap: 12px;
-    padding: 4px 0;
-    font-size: clamp(16px, 1.55vw, 22px);
-    line-height: 1.3;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+}
+
+.aw-text {
+    font-size: clamp(14px, 1.3vw, 20px);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
     letter-spacing: -0.02em;
 }
 
-.aw-num {
-    color: var(--muted);
+.aw-text .muted {
+    font-weight: 400;
+    text-transform: none;
 }
 
 .aw-score {
+    font-weight: 900;
+    font-size: clamp(20px, 1.9vw, 30px);
+    letter-spacing: -0.02em;
     color: var(--brand);
     font-variant-numeric: tabular-nums;
 }
@@ -2319,8 +2322,13 @@ button {
         padding: 52px 22% 76px;
     }
 
+    .spec-num,
+    .aw-num {
+        font-size: 18px;
+    }
+
     .spec-row {
-        grid-template-columns: var(--col) 1fr 8px;
+        grid-template-columns: 64px 1fr 8px;
         gap: 12px;
     }
 
@@ -2340,7 +2348,8 @@ button {
     }
 
     .award-list li {
-        grid-template-columns: var(--col) 1fr;
+        grid-template-columns: 64px 1fr;
+        align-items: start;
     }
 
     .aw-score {

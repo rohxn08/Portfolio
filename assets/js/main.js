@@ -402,7 +402,7 @@
         groups.forEach(([key, label], i) => {
             const items = d.skills[key] || [];
             grid.appendChild(el('div', { class: 'spec-row', 'data-reveal': '', style: `--i:${i % 3}` }, [
-                el('span', { class: 'spec-num', text: pad(i + 1) }),
+                el('span', { class: 'spec-num', text: `/${pad(i + 1, 3)}` }),
                 el('h3', { class: 'spec-label', text: label }),
                 el('div', { class: 'pills' }, items.map(s => el('span', { class: 'pill', text: s }))),
                 el('i', { class: 'dot end' }),
@@ -415,7 +415,7 @@
         const list = $('#education-list');
         (d.education || []).forEach((e, i) => {
             list.appendChild(el('li', { 'data-reveal': '' }, [
-                el('span', { class: 'aw-num', text: pad(i + 1) }),
+                el('span', { class: 'aw-num', text: `/${pad(i + 1, 3)}` }),
                 el('span', { class: 'aw-text' }, [
                     `${e.degree} – ${e.institution} `,
                     el('span', { class: 'muted', text: `(${e.timeline})` }),
@@ -427,7 +427,7 @@
         (d.certifications || []).concat(d.extracurricular || []).forEach((c, i) => {
             const [issuer, name] = c.includes(':') ? c.split(/:\s*/) : ['', c];
             certs.appendChild(el('li', { 'data-reveal': '' }, [
-                el('span', { class: 'aw-num', text: pad(i + 1) }),
+                el('span', { class: 'aw-num', text: `/${pad(i + 1, 3)}` }),
                 el('span', { class: 'aw-text' }, [name + ' ', issuer ? el('span', { class: 'muted', text: `(${issuer})` }) : null]),
             ]));
         });
