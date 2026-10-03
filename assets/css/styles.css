@@ -19,8 +19,9 @@
     --shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
 
     --font-display: 'Unbounded', 'Arial Black', sans-serif;
-    --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    /* One typeface everywhere: Unbounded */
+    --font-body: var(--font-display);
+    --font-mono: var(--font-display);
 
     --radius: 20px;
     --header-h: 72px;
@@ -66,9 +67,12 @@ html.modal-open {
 
 body {
     font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     transition: background-color 0.3s, color 0.3s;
@@ -138,7 +142,7 @@ ul {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
 }
@@ -514,7 +518,7 @@ body.light-mode .hero::before {
     align-items: baseline;
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     color: var(--muted);
     pointer-events: none;
     user-select: none;
@@ -666,7 +670,7 @@ body.light-mode .hero::before {
 .stat dt {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
 }
@@ -689,7 +693,7 @@ body.light-mode .hero::before {
     gap: 10px;
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
 }
@@ -1358,7 +1362,7 @@ body.light-mode .hero::before {
 .pc-cat {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--brand);
 }
@@ -1701,16 +1705,14 @@ body.light-mode .hero::before {
 .contact-text small {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
 }
 
 .contact-text strong {
     font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow-wrap: anywhere;
 }
 
 .contact-arrow {
@@ -2229,8 +2231,17 @@ html.theme-vt::view-transition-new(root) {
         height: calc(100svh - 24px);
     }
 
+    .contact-card {
+        padding: 0;
+    }
+
     .contact-main {
         padding: 18px;
+        gap: 14px;
+    }
+
+    .contact-text strong {
+        font-size: 0.88rem;
     }
 }
 
