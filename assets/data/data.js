@@ -1,6 +1,17 @@
 // Dynamic portfolio data for Rohan R
 const PORTFOLIO_DATA = {
     name: "Rohan R",
+    status: "AI Engineer Intern @ Kenpath",
+    tagline: "I design and ship intelligent systems: real-time voice agents, OCR pipelines and vision models that run on factory floors.",
+    rotatingRoles: ["Computer Vision", "OCR Pipelines", "Agentic AI", "Voice Agents", "RAG Systems"],
+    location: "Bangalore, India",
+    timezone: "Asia/Kolkata",
+    stats: [
+        { value: 9.48, decimals: 2, label: "CGPA" },
+        { value: 2, label: "AI internships" },
+        { value: 11, suffix: "+", label: "projects built" }
+    ],
+    interests: ["Technological innovation", "Video games", "Music"],
     objective: "Aspiring AI and Data Science Engineer specializing in OCR, Computer Vision, and Generative AI. Passionate about building intelligent systems and solving real-world problems through innovation.",
     aboutHtml: `
     <ul style="list-style-type: none; padding: 0;">
@@ -30,9 +41,16 @@ const PORTFOLIO_DATA = {
         agentic_ai: ["LangChain", "Mem0", "Langfuse", "LiveKit", "Pydantic", "Prompt Engineering"],
         tools: ["MLflow", "FastAPI", "Docker", "Git", "Streamlit", "Linux", "Tableau", "Power Bi", "Redis"]
     },
+    projectCategories: {
+        genai: "Generative & Agentic AI",
+        cv: "Computer Vision",
+        ml: "ML & Data",
+        other: "Systems & Tools"
+    },
     projects: [
         {
             title: "Apurva Pulse",
+            category: "genai",
             summary: "• <strong>Real-Time Agentic AI Voice-Interview Platform</strong> within the <strong>Apurva.ai</strong> ecosystem enabling designers to conduct real-time conversational interviews with experts on societal topics.<br>• <strong>Latency Optimization:</strong> Diagnosed and resolved core bottlenecks (synchronous relevance-judge LLM call & blocking Supabase writes) via async + speculative-caching refactor, cutting latency from <strong>~3s to ~1.8s</strong>.<br>• <strong>Real-Time AI & Turn-Taking:</strong> Built real-time interaction pipelines using <strong>LiveKit</strong> and <strong>Gemini Live API (gemini-3.1-flash-live-preview)</strong>, tuning native Automatic Activity Detection (AAD) to eliminate mid-sentence agent interruptions.<br>• <strong>LiveKit Egress & Recording:</strong> Built audio extraction pipelines from live sessions to persist expert audio recordings as verifiable interview evidence.<br>• <strong>Interview Template Cloning:</strong> Developed template cloning, allowing one interview to branch into multiple independently shareable, traceable child interviews without leaking parent candidate data.",
             tech: ["LiveKit", "Gemini Realtime API", "Supabase", "TimescaleDB", "PostgreSQL"],
             link: "",
@@ -40,6 +58,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "ZipRoute",
+            category: "ml",
             summary: "• <strong>AI-Powered Smart Route Optimization</strong> for delivery drivers with >10% route reduction and 87% ETA accuracy.<br>• Full-stack solution combining a <strong>FastAPI Python backend</strong> with a responsive <strong>Flutter Mobile App</strong>.<br>• Features intelligent <strong>OCR Address Extraction</strong> to automatically parse delivery destinations from images.<br>• delivers high reliability (98.5%) and low latency (<1.2s) for real-time logistics management.<br>• Comprehensive <strong>implementation documentation</strong> covering system architecture, testing suites, and performance metrics.",
             tech: ["Python", "FastAPI", "Flutter", "OCR", "Machine Learning"],
             link: "assets/projects/ziproute/index.html",
@@ -49,6 +68,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "BrainBolt",
+            category: "genai",
             summary: "• <strong>Multimodal RAG System</strong> capable of ingesting PDFs, images, web links, and YouTube videos.<br>• Powered by <strong>Google Gemini 1.5 Pro</strong> for high-fidelity summarization and reasoning.<br>• Features a <strong>Quiz Generator</strong> that creates interactive assessments from any uploaded content.<br>• Built with a futuristic <strong>Neural Grid UI</strong> using custom HTML/CSS and a <strong>FastAPI</strong> backend.<br>• Implements <strong>FAISS vector search</strong> for millisecond-latency information retrieval.",
             tech: ["Python", "FastAPI", "LangChain", "FAISS"],
             link: "https://rohxn08-brain-bolt.hf.space",
@@ -58,6 +78,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "Face Anti-Spoofing System",
+            category: "cv",
             summary: "• <strong>Hybrid biometric security system</strong> combining classical LBP+SVM texture analysis and modern <strong>MobileNetV2 CNN</strong>.<br>• Features <strong>real-time webcam protection</strong> with temporal voting to stabilize predictions and eliminate flickering.<br>• Includes <strong>smart scene detection</strong> that resets logic on subject changes for instant, snappy response.<br>• Supports <strong>dual-mode analysis</strong>: high-fidelity static image verification and low-latency live video streaming.<br>• Polished <strong>Streamlit interface</strong> with visual feedback, bounding boxes, and real-time confidence scoring.",
             tech: ["Python", "OpenCV", "TensorFlow", "Scikit-Learn", "Streamlit"],
             link: "https://github.com/rohxn08/Face-anti-spoofing-system",
@@ -65,6 +86,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "AI-Powered Document Search (RAG)",
+            category: "genai",
             summary: "• Full-stack <strong>Retrieval-Augmented Generation (RAG)</strong> system enabling natural language Q&A from uploaded documents.<br>• Features robust ingestion for PDFs, DOCX, TXT, and URLs with <strong>automatic text extraction</strong> and intelligent chunking.<br>• Integrates <strong>FAISS vector database</strong> and Sentence-Transformers for high-speed, accurate similarity search.<br>• Powered by <strong>Google Gemini API/OpenAI</strong> for generating context-aware answers with precise source citations.<br>• User-friendly Streamlit interface with <strong>conversation history tracking</strong> and dockerized deployment support.",
             tech: ["Python", "RAG", "FAISS", "Streamlit", "Google Gemini API"],
             link: "https://github.com/rohxn08/AI-powered-Document-search-using-RAG",
@@ -72,6 +94,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "Sign Language Translator",
+            category: "cv",
             summary: "• <strong>Real-time sign language detection</strong> system leveraging OpenCV and MediaPipe for accurate gesture tracking and inference.<br>• Includes a comprehensive pipeline for <strong>dataset creation</strong>: capturing webcam images, structuring data, and training custom classifiers.<br>• Features a <strong>browser-based user interface</strong> for accessible live detection and testing.<br>• Generates detailed <strong>performance metrics</strong> including accuracy scores, classification reports, and confusion matrices.<br>• Incorporates model explainability tools (<strong>LIME & SHAP</strong>) and text-to-speech output to vocalize recognized signs.",
             tech: ["Python", "OpenCV", "MediaPipe", "HTML/CSS"],
             link: "https://github.com/rohxn08/sign-language-translator",
@@ -79,6 +102,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "Automatic Image Enhancer",
+            category: "cv",
             summary: "• <strong>Automatic image enhancement</strong> tool that intelligently adjusts brightness and contrast using the <strong>CLAHE algorithm</strong>.<br>• Features a modern, user-friendly web interface built with <strong>Streamlit</strong> for easy uploading and real-time preview.<br>• Includes a robust <strong>CLI mode</strong> for quick batch processing and scripting integration.<br>• Supports all standard image formats (JPG, PNG) with <strong>automatic result saving</strong>.<br>• Built on a high-performance stack of <strong>OpenCV and NumPy</strong> for rapid image processing.",
             tech: ["Python", "NumPy", "OpenCV"],
             link: "https://github.com/rohxn08/Automatic-Image-Enhancer",
@@ -86,6 +110,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "Comparative Score Visualization",
+            category: "ml",
             summary: "• Analytic visualization tool for tracking <strong>comparative user wellness scores</strong> over time using Python and Plotly.<br>• Supports <strong>dual data modes</strong>: generating synthetic dummy scenarios and processing real collected datasets (activity, sleep, weight).<br>• Features a dynamic, <strong>interactive web-based interface</strong> with hover-over details for precise trend analysis.<br>• Implements clear <strong>color-coded legends</strong> and distinct user identification for multi-user comparison.<br>• Generates immediate <strong>HTML output</strong> viewable directly in browsers or via Live Server.",
             tech: ["Python", "Plotly", "Pandas", "NumPy", "HTML"],
             link: "https://github.com/rohxn08/Comparative-Score-Visualization-of-wellness-scores",
@@ -93,6 +118,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "Binance Futures Order Bot",
+            category: "other",
             summary: "• <strong>CLI-based high-frequency trading bot</strong> for Binance USDT-M Futures with robust error validation.<br>• Supports advanced order strategies including <strong>Stop-WLimit, OCO (emulated)</strong>, TWAP, and Grid trading.<br>• Features centralized <strong>logging system</strong> with error tracing for reliable production monitoring.<br>• Includes a simulation mode ('mock_demo') to <strong>test strategies risk-free</strong> without API keys.<br>• Configurable for both Testnet and Mainnet environments with <strong>secure environment variable management</strong>.",
             tech: ["Python", "CLI"],
             link: "https://github.com/rohxn08/Rohan-Binance_bot",
@@ -100,6 +126,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "MNIST Digit Prediction",
+            category: "ml",
             summary: "• Interactive <strong>desktop GUI application</strong> for handwritten digit recognition built with Python and Tkinter.<br>• Features a <strong>real-time drawing canvas</strong> allowing users to sketch digits (0-9) using a mouse input.<br>• Powered by a pre-trained <strong>Convolutional Neural Network (CNN)</strong> model (Keras/TensorFlow) for high-accuracy classification.<br>• Delivers instant <strong>feedback with prediction results</strong> and confidence scores upon clicking 'Predict'.<br>• Lightweight and easy to deploy with utility functions for <strong>canvas clearing</strong> and image preprocessing.",
             tech: ["Python", "Deep Learning"],
             link: "https://github.com/rohxn08/MNIST-digit-prediction",
@@ -107,6 +134,7 @@ const PORTFOLIO_DATA = {
         },
         {
             title: "Chatting Via Bluetooth",
+            category: "other",
             summary: "• Python-based chat system enabling reliable <strong>device-to-device communication</strong> via Bluetooth RFCOMM sockets.<br>• Wrapped in a modern <strong>Flask web interface</strong> for easy browser-based control and message visualization.<br>• Supports <strong>dual operating modes</strong> (Server/Host and Client/Connector) configurable via the UI.<br>• Implements real-time message piping using <strong>Python threading</strong> and subprocess management.<br>• Eliminates complex terminal usage by offering a clean, <strong>unified dashboard</strong> for connection management.",
             tech: ["Python", "Sockets", "Flask", "HTML", "CSS", "JavaScript"],
             link: "https://github.com/rohxn08/Chatting-Via-Bluetooth",

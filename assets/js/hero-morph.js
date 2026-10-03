@@ -243,13 +243,13 @@
         canvas.height = Math.round(H * dpr);
         canvas.style.width = W + 'px';
         canvas.style.height = H + 'px';
-        if (W > 900) {
+        const anchor = document.querySelector('.hero-visual');
+        const a = anchor && anchor.getBoundingClientRect();
+        if (W > 900 && a && a.width > 0) {
             // Sit in the (empty) right column of the hero grid.
-            const sidebar = 80;
-            const colW = (W - sidebar) / 2;
-            cx = sidebar + colW * 1.5;
-            cy = H * 0.52;
-            R = Math.min(colW, H) * 0.34;
+            cx = a.left - rect.left + a.width / 2;
+            cy = a.top - rect.top + a.height / 2;
+            R = Math.min(a.width, a.height) * 0.4;
             layerAlpha = 1;
         } else {
             // Behind the text on small screens, dimmed for readability.

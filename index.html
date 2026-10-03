@@ -4,45 +4,78 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rohan R | Portfolio</title>
-  <meta name="description" content="Portfolio of Rohan R - AI & Data Science Engineering" />
+  <title>Rohan R | AI Engineer</title>
+  <meta name="description"
+    content="Portfolio of Rohan R, AI & Data Science engineer building OCR, computer vision, generative and agentic AI systems." />
+  <meta name="theme-color" content="#000000" />
+  <meta property="og:title" content="Rohan R | AI Engineer" />
+  <meta property="og:description" content="OCR, Computer Vision, Generative & Agentic AI." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@400;600;700;900&display=swap"
     rel="stylesheet" />
-  <link rel="icon" href="assets/favicon.png" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='34' fill='%23FE3D00'%3ER%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 
 <body>
-  <header class="site-header">
+  <script>
+    document.documentElement.classList.add('js');
+    try { if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode'); } catch (e) { }
+  </script>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="site-header">
     <div class="container header-row">
-      <div class="brand">
-        <span id="brand-name">ROHAN R®</span>
-      </div>
-      <nav class="nav" id="nav">
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a id="resume-link" target="_blank" rel="noopener">[ Resume ]</a>
-        <button id="theme-toggle" aria-label="Toggle Theme">
-          <!-- Sun Icon for Light Mode (Initial state typically hidden if dark is default, handled by JS) -->
-          <svg class="sun-icon" viewBox="0 0 24 24" style="display:none;">
+      <a href="#top" class="brand" aria-label="Back to top">
+        <span class="brand-mark">R</span>
+        <span id="brand-name">ROHAN R</span><sup>®</sup>
+      </a>
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a href="#about" data-nav>About</a>
+        <a href="#experience" data-nav>Experience</a>
+        <a href="#projects" data-nav>Projects</a>
+        <a href="#skills" data-nav>Skills</a>
+        <a href="#contact" data-nav>Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-ghost btn-sm resume-link" target="_blank" rel="noopener">Resume <span aria-hidden="true">↗</span></a>
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle colour theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.5" />
             <path
-              d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z" />
+              d="M12 1.5v3M12 19.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1.5 12h3M19.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" />
           </svg>
-          <!-- Moon Icon for Dark Mode -->
-          <svg class="moon-icon" viewBox="0 0 24 24">
-            <path
-              d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
           </svg>
         </button>
-      </nav>
-      <button id="menu-toggle" class="icon-button burger" aria-label="Menu" aria-expanded="false">MENU</button>
+        <button id="menu-toggle" class="icon-btn burger" aria-label="Open menu" aria-expanded="false"
+          aria-controls="mobile-menu">
+          <span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a class="resume-link" target="_blank" rel="noopener">Resume ↗</a>
+    </nav>
+  </div>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
     <section class="hero">
       <canvas id="neural-canvas" class="hero-canvas" aria-hidden="true"></canvas>
       <div class="hero-hud" aria-hidden="true">
@@ -50,128 +83,154 @@
         <span id="hud-name">LATENT_SPACE</span>
         <span class="hud-hint">click to morph</span>
       </div>
-      <div class="hero-layout">
-        <!-- 1. Left Vertical Sidebar -->
-        <aside class="hero-sidebar">
-          <nav class="vertical-nav">
-            <!-- Empty sidebar as requested -->
-          </nav>
-        </aside>
 
-        <!-- 2. Main Content Area -->
-        <div class="hero-grid">
-
-          <!-- Left: Brand & Bio -->
-          <div class="hero-info">
-            <h1 class="niki-title"><span id="hero-fname">ROHAN</span><br><span class="highlight"
-                id="hero-lname">R</span></h1>
-
-            <div class="hero-bio-box">
-              <p class="bio-role">AI & Data Science Engineer</p>
-              <p class="bio-text">
-                An Independent AI Engineer<br>
-                specializing in OCR, Computer Vision,<br>
-                and Generative AI.
-              </p>
-              <a href="#about" class="bio-btn">About Me &rarr;</a>
-            </div>
+      <div class="container hero-grid">
+        <div class="hero-info">
+          <div class="status-pill hero-in" style="--d:0">
+            <span class="pulse-dot"></span>
+            <span id="hero-status">Open to opportunities</span>
           </div>
 
-          <!-- Right: Empty -->
-          <div class="hero-gallery-placeholder"></div>
+          <h1 class="hero-title">
+            <span id="hero-fname">ROHAN</span><span class="highlight" id="hero-lname">R</span>
+          </h1>
+
+          <p class="hero-role hero-in" style="--d:1">
+            AI Engineer building
+            <span class="rotator" id="hero-rotator" aria-live="polite">Computer Vision</span><span class="caret"
+              aria-hidden="true"></span>
+          </p>
+
+          <p class="hero-sub hero-in" style="--d:2" id="hero-sub"></p>
+
+          <div class="hero-ctas hero-in" style="--d:3">
+            <a href="#projects" class="btn btn-primary magnetic">View projects <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost magnetic resume-link" target="_blank" rel="noopener">Download resume</a>
+          </div>
+
+          <dl class="hero-stats hero-in" style="--d:4" id="hero-stats"></dl>
         </div>
+        <div class="hero-visual" aria-hidden="true"></div>
       </div>
+
+      <a href="#about" class="scroll-cue" aria-label="Scroll to About">
+        <span>Scroll</span>
+        <i></i>
+      </a>
     </section>
 
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee-track"></div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
     <section id="about" class="section">
       <div class="container">
-        <h2>About</h2>
-        <div id="about-text"></div>
+        <header class="section-head" data-reveal>
+          <span class="section-index">01</span>
+          <h2>About</h2>
+          <p class="section-kicker">Who I am, in a few tiles.</p>
+        </header>
+        <div class="bento" id="about-bento"></div>
       </div>
     </section>
 
-    <section id="skills" class="section alt">
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience" class="section section-alt">
       <div class="container">
-        <h2>Skills</h2>
-
-        <h3 class="skill-category">Languages</h3>
-        <div class="chips" id="skills-languages"></div>
-
-        <h3 class="skill-category">Classical ML & Computer Vision</h3>
-        <div class="chips" id="skills-ai-ml"></div>
-
-        <h3 class="skill-category">Generative AI, NLP and Vector DB's</h3>
-        <div class="chips" id="skills-genai-nlp"></div>
-
-        <h3 class="skill-category">Agentic AI</h3>
-        <div class="chips" id="skills-agentic-ai"></div>
-
-        <h3 class="skill-category">Tools & Technologies</h3>
-        <div class="chips" id="skills-tools"></div>
-      </div>
-    </section>
-
-    <section id="experience" class="section">
-      <div class="container">
-        <h2>Experience</h2>
-        <div id="experience-list" class="timeline"></div>
-      </div>
-    </section>
-
-    <section id="projects" class="section alt">
-      <div class="container">
-        <h2>Projects</h2>
-      </div>
-      <div class="projects-wrapper">
-        <div id="projects-slider" class="projects-slider">
-          <!-- Grid injected by JS -->
-        </div>
-        <div id="project-detail" class="project-detail projects-hidden">
-          <!-- Detail injected by JS -->
+        <header class="section-head" data-reveal>
+          <span class="section-index">02</span>
+          <h2>Experience</h2>
+          <p class="section-kicker">Shipping AI into production.</p>
+        </header>
+        <div class="timeline" id="experience-list">
+          <div class="timeline-rail" aria-hidden="true"><div class="timeline-fill" id="timeline-fill"></div></div>
         </div>
       </div>
-
     </section>
 
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="section">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <span class="section-index">03</span>
+          <h2>Projects</h2>
+          <p class="section-kicker">Things I've designed, trained and shipped.</p>
+        </header>
+        <div class="filters" id="project-filters" role="tablist" aria-label="Filter projects" data-reveal></div>
+        <div class="project-grid" id="project-grid"></div>
+        <div class="center" data-reveal>
+          <button class="btn btn-ghost" id="projects-more" hidden>Show all projects</button>
+        </div>
+      </div>
+    </section>
 
+    <!-- ============ SKILLS ============ -->
+    <section id="skills" class="section section-alt">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <span class="section-index">04</span>
+          <h2>Skills</h2>
+          <p class="section-kicker">The stack I reach for.</p>
+        </header>
+        <div class="skills-grid" id="skills-grid"></div>
+      </div>
+    </section>
 
+    <!-- ============ EDUCATION & CERTS ============ -->
     <section id="education" class="section">
       <div class="container">
-        <h2>Education</h2>
-        <div id="education-list" class="timeline"></div>
+        <header class="section-head" data-reveal>
+          <span class="section-index">05</span>
+          <h2>Education</h2>
+          <p class="section-kicker">Foundations and certifications.</p>
+        </header>
+        <div class="edu-layout">
+          <div class="edu-list" id="education-list"></div>
+          <aside class="certs card" data-reveal>
+            <h3 class="card-label">Certifications</h3>
+            <ul class="check-list" id="certs-list"></ul>
+            <h3 class="card-label" id="extra-label">Extracurricular</h3>
+            <ul class="check-list" id="extra-list"></ul>
+          </aside>
+        </div>
       </div>
     </section>
 
-    <section id="certs" class="section alt">
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section contact">
       <div class="container">
-        <h2>Certifications</h2>
-        <ul id="certs-list" class="list"></ul>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="container">
-        <h2>Contact</h2>
-        <form id="contact-form" class="contact-form">
-          <div class="form-row">
-            <input type="text" id="name" name="name" placeholder="Your name" required />
-            <input type="email" id="email" name="email" placeholder="Your email" required />
-          </div>
-          <textarea id="message" name="message" placeholder="Your message" rows="5" required></textarea>
-          <button type="submit" class="button primary">Send</button>
-        </form>
+        <header class="section-head" data-reveal>
+          <span class="section-index">06</span>
+          <h2>Contact</h2>
+        </header>
+        <p class="contact-title" data-reveal>Let's build something <span class="highlight">intelligent</span>.</p>
+        <p class="contact-sub" data-reveal>Internships, full-time roles, collaborations or just a good AI conversation. My
+          inbox is open.</p>
+        <div class="contact-grid" id="contact-grid"></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-row">
-      <span>© <span id="year"></span> <span id="footer-name">Rohan R</span></span>
-      <div class="socials" id="socials"></div>
+      <span>© <span id="year"></span> <span id="footer-name">Rohan R</span>. Built by hand, no templates.</span>
+      <a href="#top" class="back-top">Back to top ↑</a>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- Project modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" id="modal-panel">
+      <button class="icon-btn modal-close" data-close aria-label="Close">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <script src="assets/js/hacker-text.js"></script>
   <script src="assets/data/data.js"></script>
   <script src="assets/js/main.js"></script>
