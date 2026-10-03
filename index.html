@@ -22,9 +22,35 @@
 </head>
 
 <body>
-  <script>document.documentElement.classList.add('js');</script>
+  <script>
+    (function () {
+      var root = document.documentElement, seen = false;
+      root.classList.add('js');
+      // The intro loader plays once per browser session.
+      try { seen = sessionStorage.getItem('introSeen') === '1'; } catch (e) { }
+      if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) root.classList.add('no-preload');
+      else root.classList.add('preloading');
+    })();
+  </script>
 
   <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ INTRO LOADER ============ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <span class="cross pl-tl"></span>
+    <span class="cross pl-tr"></span>
+    <div class="pl-stage">
+      <div class="cube">
+        <i class="cf front"><b></b></i><i class="cf back"></i><i class="cf right"></i>
+        <i class="cf left"></i><i class="cf top"></i><i class="cf bottom"></i>
+      </div>
+    </div>
+    <div class="pl-foot">
+      <div class="pl-row"><span class="pl-pct" id="pl-pct">0%</span><span class="pl-page">(Home)</span></div>
+      <div class="rail pl-rail"><span><i class="dot"></i>Home</span><span><i class="dot"></i>(Loading)</span><span>Rohan R®</span></div>
+      <div class="pl-bar"><i id="pl-bar"></i></div>
+    </div>
+  </div>
 
   <!-- ============ HEADER ============ -->
   <header class="site-header" id="site-header">

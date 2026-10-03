@@ -658,7 +658,38 @@
         $('#projects-more').addEventListener('click', () => { showAll = true; renderProjects(true); });
         $$('[data-close]').forEach(n => n.addEventListener('click', closeModal));
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-        requestAnimationFrame(() => document.body.classList.add('loaded'));
+        initPreloader(() => document.body.classList.add('loaded'));
+    }
+
+    // Intro loader: counts to 100% (tracking real page load), then wipes away.
+    function initPreloader(done) {
+        const root = document.documentElement, pre = $('#preloader');
+        if (!pre || !root.classList.contains('preloading')) {
+            if (pre) pre.remove();
+            requestAnimationFrame(done);
+            return;
+        }
+        const pct = $('#pl-pct'), bar = $('#pl-bar');
+        const MIN_MS = 2200, start = performance.now();
+        let pageReady = document.readyState === 'complete', shown = 0;
+        if (!pageReady) window.addEventListener('load', () => { pageReady = true; }, { once: true });
+        // Never hold the visitor for long on a slow connection.
+        setTimeout(() => { pageReady = true; }, 6000);
+
+        (function tick(now) {
+            const t = Math.min((now - start) / MIN_MS, 1);
+            const target = pageReady ? 100 * (1 - Math.pow(1 - t, 3)) : Math.min(90, 100 * t * 0.9);
+            shown += (target - shown) * 0.12;
+            if (pageReady && t >= 1 && shown > 99.5) shown = 100;
+            pct.textContent = Math.round(shown) + '%';
+            bar.style.transform = `scaleX(${shown / 100})`;
+            if (shown < 100) return requestAnimationFrame(tick);
+
+            try { sessionStorage.setItem('introSeen', '1'); } catch (e) { /* storage blocked */ }
+            root.classList.add('pl-done');
+            setTimeout(() => { root.classList.remove('preloading'); done(); }, 650);
+            setTimeout(() => pre.remove(), 1500);
+        })(start);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
