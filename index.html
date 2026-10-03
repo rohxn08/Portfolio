@@ -44,6 +44,12 @@
 
   <main>
     <section class="hero">
+      <canvas id="neural-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-hud" aria-hidden="true">
+        <span id="hud-index">01 / 05</span>
+        <span id="hud-name">LATENT_SPACE</span>
+        <span class="hud-hint">click to morph</span>
+      </div>
       <div class="hero-layout">
         <!-- 1. Left Vertical Sidebar -->
         <aside class="hero-sidebar">
@@ -169,6 +175,7 @@
   <script src="assets/js/hacker-text.js"></script>
   <script src="assets/data/data.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/hero-morph.js"></script>
 </body>
 
 </html>

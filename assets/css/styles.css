@@ -234,6 +234,75 @@ h6,
     z-index: 1;
 }
 
+/* Neural morph canvas: above the gradient overlay, below the content */
+.hero-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    animation: heroCanvasIn 1.6s ease 0.4s forwards;
+}
+
+@keyframes heroCanvasIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.hero-hud {
+    position: absolute;
+    right: 40px;
+    bottom: 36px;
+    z-index: 3;
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--text-sec);
+    pointer-events: none;
+    user-select: none;
+}
+
+#hud-index {
+    color: var(--brand);
+}
+
+#hud-name {
+    color: var(--text);
+    min-width: 15ch;
+}
+
+.hud-hint {
+    opacity: 0.6;
+    text-transform: uppercase;
+}
+
+.hud-hint::before {
+    content: '// ';
+}
+
+@media (max-width: 900px) {
+    .hero-hud {
+        right: 20px;
+        bottom: 20px;
+        font-size: 0.65rem;
+    }
+
+    .hud-hint {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-canvas {
+        animation: none;
+        opacity: 1;
+    }
+}
+
 .hero-layout {
     display: flex;
     height: 100%;
