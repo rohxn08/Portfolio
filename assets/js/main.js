@@ -271,6 +271,7 @@
     }
 
     function renderProjects(animate) {
+        if (animate) finishProjectIntro();
         const grid = $('#project-grid');
         const more = $('#projects-more');
         const filtering = selectedCats.size > 0;
@@ -314,6 +315,119 @@
             ]),
         ]);
         return cell;
+    }
+
+    // ------------------------------------------------------- project intro
+    // On first view: one pack pops in, the rest fan out diagonally from
+    // behind it ("PROJECT SQUAD"), then every pack flies into its grid cell.
+    let introState = 'idle'; // idle | pending | playing | done
+    let introLayer = null;
+
+    function setupProjectIntro() {
+        const grid = $('#project-grid');
+        if (reduceMotion || !('IntersectionObserver' in window) || !Element.prototype.animate) { introState = 'done'; return; }
+        introState = 'pending';
+        grid.classList.add('intro-pending');
+        const io = new IntersectionObserver((entries) => {
+            if (!entries[0].isIntersecting) return;
+            io.disconnect();
+            if (introState === 'pending') playProjectIntro();
+        }, { rootMargin: '0px 0px -62% 0px' });
+        io.observe(grid);
+    }
+
+    function finishProjectIntro() {
+        if (introState === 'done') return;
+        introState = 'done';
+        $('#project-grid').classList.remove('intro-pending');
+        if (introLayer) {
+            const layer = introLayer;
+            introLayer = null;
+            layer.getAnimations({ subtree: true }).forEach(a => a.cancel());
+            layer.remove();
+        }
+    }
+
+    async function playProjectIntro() {
+        introState = 'playing';
+        const section = $('#projects'), grid = $('#project-grid');
+        const frames = $$('.pack-cell .pack-frame', grid);
+        if (!frames.length) return finishProjectIntro();
+
+        const sr = section.getBoundingClientRect();
+        const gr = grid.getBoundingClientRect();
+        const headerH = $('#site-header').offsetHeight;
+        // Stage = the part of the grid currently on screen.
+        const top = Math.max(gr.top, headerH + 10);
+        const bottom = Math.min(gr.bottom, window.innerHeight);
+        const W = gr.width, H = Math.max(bottom - top, 260);
+        const small = W < 700;
+
+        const layer = el('div', { class: 'intro-layer', 'aria-hidden': 'true' });
+        const word = el('div', {
+            class: 'intro-word',
+            style: `left:${gr.left - sr.left}px; top:${top - sr.top + 12}px;`,
+            html: '<span>PROJECT</span><span>SQUAD</span>',
+        });
+        layer.appendChild(word);
+        const cards = frames.map((f, i) => {
+            const r = f.getBoundingClientRect();
+            const card = el('div', {
+                class: 'intro-card',
+                style: `left:${r.left - sr.left}px; top:${r.top - sr.top}px; width:${r.width}px; height:${r.height}px; z-index:${frames.length - i};`,
+            }, [el('img', { src: $('img', f).src, alt: '' })]);
+            layer.appendChild(card);
+            return { card, cx: r.left + r.width / 2, cy: r.top + r.height / 2, w: r.width, h: r.height };
+        });
+        introLayer = layer;
+        section.appendChild(layer);
+
+        const n = cards.length;
+        const s2 = small ? 0.55 : 0.72;
+        const ch = cards[0].h * s2;
+        const center = { x: gr.left + W / 2, y: top + H / 2 };
+        const spanX = Math.min(W * (small ? 0.62 : 0.74), n * cards[0].w * s2 * 1.05);
+        const spanY = Math.max(H - ch - 40, 0);
+        const diag = i => n === 1 ? center : {
+            x: center.x - spanX / 2 + spanX * i / (n - 1),
+            y: top + 20 + ch / 2 + spanY * i / (n - 1),
+        };
+        const tf = (c, pt, sc) => `translate(${(pt.x - c.cx).toFixed(1)}px, ${(pt.y - c.cy).toFixed(1)}px) scale(${sc})`;
+        const wait = ms => new Promise(r => setTimeout(r, ms));
+        const alive = () => introLayer === layer;
+        const ease = 'cubic-bezier(.2,.7,0,1)';
+
+        // Everything starts stacked behind the first pack.
+        cards.forEach((c, i) => { c.card.style.transform = tf(c, center, i ? 0.92 : 1.02); c.card.style.opacity = i ? 0 : 1; });
+
+        // 1. A single pack pops in.
+        await cards[0].card.animate([
+            { transform: tf(cards[0], center, 0.6), opacity: 0 },
+            { transform: tf(cards[0], center, 1.02), opacity: 1 },
+        ], { duration: 700, easing: ease, fill: 'both' }).finished.catch(() => { });
+        await wait(550);
+        if (!alive()) return;
+
+        // 2. The squad fans out diagonally from behind it.
+        word.animate([{ opacity: 0, transform: 'translateY(30px)' }, { opacity: 1, transform: 'none' }],
+            { duration: 700, easing: ease, fill: 'both' });
+        await Promise.all(cards.map((c, i) => c.card.animate([
+            { transform: tf(c, center, i ? 0.92 : 1.02), opacity: i ? 0 : 1 },
+            { transform: tf(c, diag(i), s2), opacity: 1 },
+        ], { duration: 850, delay: i * 70, easing: ease, fill: 'both' }).finished)).catch(() => { });
+        await wait(900);
+        if (!alive()) return;
+
+        // 3. Each pack flies into its own grid cell.
+        word.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'both' });
+        await Promise.all(cards.map((c, i) => c.card.animate([
+            { transform: tf(c, diag(i), s2) },
+            { transform: 'none' },
+        ], { duration: 900, delay: i * 60, easing: ease, fill: 'both' }).finished)).catch(() => { });
+        if (!alive()) return;
+        grid.classList.remove('intro-pending');
+        await wait(450);
+        finishProjectIntro();
     }
 
     // --------------------------------------------------------------- modal
@@ -554,6 +668,7 @@
         renderExperience();
         renderFilters();
         renderProjects(false);
+        setupProjectIntro();
         renderSkills();
         renderEducation();
         renderContact();

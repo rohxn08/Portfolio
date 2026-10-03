@@ -393,6 +393,38 @@ button {
     background: #2a2a2d;
 }
 
+#menu-toggle {
+    height: 44px;
+    padding: 0 20px;
+    gap: 12px;
+    border-radius: 6px;
+    background: var(--brand);
+    color: #fff;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0;
+}
+
+#menu-toggle:hover,
+#menu-toggle:focus-visible {
+    background: var(--text);
+    color: var(--brand);
+}
+
+#menu-toggle .menu-icon {
+    width: 16px;
+    gap: 3.5px;
+}
+
+#menu-toggle .menu-icon i {
+    height: 2px;
+}
+
+.menu-open #menu-toggle .menu-icon i:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.menu-open #menu-toggle .menu-icon i:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
 .menu-icon {
     display: inline-flex;
     flex-direction: column;
@@ -1276,6 +1308,62 @@ button {
 
 #projects {
     padding-top: 220px;
+}
+
+/* ---- project intro (see playProjectIntro) */
+.pack-grid.intro-pending .pack-cell {
+    opacity: 1;
+    transform: none;
+}
+
+.pack-cell .pc-stage > *,
+.pack-cell .pc-foot {
+    transition: opacity .6s ease;
+}
+
+.pack-grid.intro-pending .pc-stage > *,
+.pack-grid.intro-pending .pc-foot {
+    opacity: 0;
+}
+
+.intro-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.intro-card {
+    position: absolute;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #0c0d0d;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .55);
+    will-change: transform;
+}
+
+.intro-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.intro-word {
+    position: absolute;
+    z-index: 0;
+    display: grid;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(56px, 11vw, 200px);
+    line-height: .82;
+    letter-spacing: -0.03em;
+    color: var(--soft);
+    opacity: 0;
+}
+
+.intro-word span:last-child {
+    padding-left: .5em;
 }
 
 .pack-head {
