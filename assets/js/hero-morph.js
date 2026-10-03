@@ -164,7 +164,7 @@
 
     for (let i = 0; i < COUNT; i++) {
         seed[i] = Math.random();
-        hot[i] = Math.random() < 0.22 ? 1 : 0;
+        hot[i] = Math.random() < 0.05 ? 1 : 0; // mostly monochrome, a few brand sparks
         let a = gauss(), b = gauss(), c = gauss();
         const len = Math.hypot(a, b, c) || 1;
         scatter[i * 3] = a / len; scatter[i * 3 + 1] = b / len; scatter[i * 3 + 2] = c / len;
@@ -245,12 +245,12 @@
         canvas.style.height = H + 'px';
         const anchor = document.querySelector('.hero-visual');
         const a = anchor && anchor.getBoundingClientRect();
-        if (W > 900 && a && a.width > 0) {
-            // Sit in the (empty) right column of the hero grid.
+        if (a && a.width > 0 && a.height > 120) {
+            // Sit in the hero's dedicated visual slot.
             cx = a.left - rect.left + a.width / 2;
             cy = a.top - rect.top + a.height / 2;
-            R = Math.min(a.width, a.height) * 0.4;
-            layerAlpha = 1;
+            R = Math.min(a.width, a.height) * 0.42;
+            layerAlpha = W > 900 ? 1 : 0.85;
         } else {
             // Behind the text on small screens, dimmed for readability.
             cx = W * 0.5;
@@ -276,7 +276,7 @@
         targetRotX = 0; targetRotYOff = 0;
     });
     hero.addEventListener('click', (e) => {
-        if (e.target.closest('a, button, input, textarea')) return;
+        if (e.target.closest('a, button, input, textarea, .hero-side')) return;
         const rect = canvas.getBoundingClientRect();
         const px = e.clientX - rect.left, py = e.clientY - rect.top;
         if (!reduceMotion) {
@@ -391,10 +391,10 @@
             }
 
             const depth = Math.min(Math.max((rz + 1.5) / 3, 0), 1);
-            const size = (0.9 + depth * 1.9 + pulse * 2.4) * (R / 220) * 2.6;
-            const alpha = (0.18 + depth * 0.62 + pulse * 0.5) * layerAlpha;
+            const size = (0.7 + depth * 1.5 + pulse * 1.8) * (R / 220) * 1.7;
+            const alpha = (0.14 + depth * 0.56 + pulse * 0.45) * layerAlpha;
             ctx.globalAlpha = alpha > 1 ? 1 : alpha;
-            ctx.drawImage(hot[i] || pulse > 0.45 ? sprites.brand : sprites.neutral, px - size, py - size, size * 2, size * 2);
+            ctx.drawImage(hot[i] || pulse > 0.85 ? sprites.brand : sprites.neutral, px - size, py - size, size * 2, size * 2);
         }
         ctx.globalAlpha = 1;
         ctx.globalCompositeOperation = 'source-over';

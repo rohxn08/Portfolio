@@ -4,227 +4,248 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rohan R | AI Engineer</title>
+  <title>Rohan R® | AI Engineer</title>
   <meta name="description"
     content="Portfolio of Rohan R, AI & Data Science engineer building OCR, computer vision, generative and agentic AI systems." />
-  <meta name="theme-color" content="#000000" />
-  <meta property="og:title" content="Rohan R | AI Engineer" />
+  <meta name="theme-color" content="#060607" />
+  <meta property="og:title" content="Rohan R® | AI Engineer" />
   <meta property="og:description" content="OCR, Computer Vision, Generative & Agentic AI." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Inter+Tight:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='34' fill='%23FE3D00'%3ER%3C/text%3E%3C/svg%3E" />
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23060607'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='36' fill='%23FE3D00'%3ER%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 
 <body>
-  <script>
-    document.documentElement.classList.add('js');
-    try { if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode'); } catch (e) { }
-  </script>
+  <script>document.documentElement.classList.add('js');</script>
 
-  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <!-- ============ HEADER ============ -->
   <header class="site-header" id="site-header">
-    <div class="container header-row">
-      <a href="#top" class="brand" aria-label="Back to top">
-        <span class="brand-mark">R</span>
-        <span id="brand-name">ROHAN R</span><sup>®</sup>
-      </a>
-      <nav class="nav" id="nav" aria-label="Primary">
-        <a href="#about" data-nav>About</a>
-        <a href="#experience" data-nav>Experience</a>
-        <a href="#projects" data-nav>Projects</a>
-        <a href="#skills" data-nav>Skills</a>
-        <a href="#contact" data-nav>Contact</a>
-      </nav>
-      <div class="header-actions">
-        <a class="btn btn-ghost btn-sm resume-link" target="_blank" rel="noopener">Resume <span aria-hidden="true">↗</span></a>
-        <button id="theme-toggle" class="icon-btn" aria-label="Toggle colour theme">
-          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="4.5" />
-            <path
-              d="M12 1.5v3M12 19.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1.5 12h3M19.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" />
-          </svg>
-          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
-          </svg>
-        </button>
-        <button id="menu-toggle" class="icon-btn burger" aria-label="Open menu" aria-expanded="false"
-          aria-controls="mobile-menu">
-          <span></span><span></span>
-        </button>
-      </div>
-    </div>
+    <a href="#top" class="logo" aria-label="Rohan R, back to top">ROHAN<sup>®</sup></a>
+    <p class="meta">+ AI Engineer<br>based in (India)</p>
+    <p class="meta">+ Bengaluru, Karnataka<br><span class="clock" data-clock>--:--:--</span> (GMT +5:30)</p>
+    <button class="menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+      <span class="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="menu-label">Menu</span>
+    </button>
   </header>
 
-  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <nav aria-label="Mobile">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-      <a class="resume-link" target="_blank" rel="noopener">Resume ↗</a>
+  <!-- ============ FULLSCREEN MENU ============ -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="rail menu-rail"><span>©000</span><span>(Navigation)</span><span>Rohan R® 2026</span></div>
+    <nav class="menu-links" aria-label="Primary">
+      <a href="#about"><span class="ml-text">About</span><span class="ml-num">/01</span></a>
+      <a href="#experience"><span class="ml-text">Experience</span><span class="ml-num">/02</span></a>
+      <a href="#projects"><span class="ml-text">Projects</span><span class="ml-num">/03</span></a>
+      <a href="#skills"><span class="ml-text">Toolkit</span><span class="ml-num">/04</span></a>
+      <a href="#contact"><span class="ml-text">Contact</span><span class="ml-num">/05</span></a>
     </nav>
+    <div class="menu-foot">
+      <a class="resume-link" target="_blank" rel="noopener">Resume ↗</a>
+      <a data-github target="_blank" rel="noopener">GitHub ↗</a>
+      <a data-email>Email ↗</a>
+    </div>
   </div>
 
   <main id="top">
     <!-- ============ HERO ============ -->
-    <section class="hero">
+    <section class="hero" id="hero">
       <canvas id="neural-canvas" class="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-hud" aria-hidden="true">
-        <span id="hud-index">01 / 05</span>
-        <span id="hud-name">LATENT_SPACE</span>
-        <span class="hud-hint">click to morph</span>
-      </div>
+      <div class="scanlines" aria-hidden="true"></div>
 
-      <div class="container hero-grid">
-        <div class="hero-info">
-          <div class="status-pill hero-in" style="--d:0">
-            <span class="pulse-dot"></span>
-            <span id="hero-status">Open to opportunities</span>
-          </div>
+      <h1 class="hero-name" aria-label="Rohan R">
+        <span class="hn-line"><span class="hn-inner">ROHAN</span></span><sup>®</sup>
+      </h1>
 
-          <h1 class="hero-title">
-            <span id="hero-fname">ROHAN</span><span class="highlight" id="hero-lname">R</span>
-          </h1>
-
-          <p class="hero-role hero-in" style="--d:1">
-            AI Engineer building
-            <span class="rotator" id="hero-rotator" aria-live="polite">Computer Vision</span><span class="caret"
-              aria-hidden="true"></span>
-          </p>
-
-          <p class="hero-sub hero-in" style="--d:2" id="hero-sub"></p>
-
-          <div class="hero-ctas hero-in" style="--d:3">
-            <a href="#projects" class="btn btn-primary magnetic">View projects <span aria-hidden="true">→</span></a>
-            <a class="btn btn-ghost magnetic resume-link" target="_blank" rel="noopener">Download resume</a>
-          </div>
-
-          <dl class="hero-stats hero-in" style="--d:4" id="hero-stats"></dl>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-hud">
+          <span id="hud-index">01 / 05</span>
+          <span id="hud-name">LATENT_SPACE</span>
+          <span class="hud-hint">(click to morph)</span>
         </div>
-        <div class="hero-visual" aria-hidden="true"></div>
       </div>
 
-      <a href="#about" class="scroll-cue" aria-label="Scroll to About">
-        <span>Scroll</span>
-        <i></i>
-      </a>
+      <div class="hero-side">
+        <div class="pack-strip" id="hero-strip"></div>
+
+        <div class="hero-intro">
+          <p class="hi-text">
+            <span class="hi-lead"><i class="dot"></i>An Independent AI Engineer</span>
+            based in India. I'm (passionate) about uncovering (the art) and science behind
+            <span class="rotator" id="hero-rotator">intelligent systems</span>.
+          </p>
+          <span class="hi-year">©26</span>
+          <a href="#about" class="btn-arrow">
+            <span>About Rohan</span><i aria-hidden="true">→</i>
+          </a>
+        </div>
+      </div>
+
+      <ul class="hero-social" id="hero-social" aria-label="Links"></ul>
+
+      <div class="rail hero-rail">
+        <span><i class="dot"></i>©001</span>
+        <span><i class="dot"></i>(Home)</span>
+        <a href="#statement" class="scroll-more">Scroll More<span>___</span></a>
+      </div>
     </section>
 
-    <!-- ============ MARQUEE ============ -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track" id="marquee-track"></div>
-    </div>
+    <!-- ============ STATEMENT ============ -->
+    <section class="statement" id="statement" aria-label="Introduction">
+      <h2 class="display big" data-lines>
+        <span class="ln"><span>BY.ROHAN<sup>®</sup></span></span>
+        <span class="ln"><span><b class="bar"></b>ENGINEER</span></span>
+      </h2>
+      <p class="display big ghost-type" aria-hidden="true" data-drift>
+        <span>/ FROM</span><span>INDIA</span>
+      </p>
+    </section>
 
     <!-- ============ ABOUT ============ -->
     <section id="about" class="section">
-      <div class="container">
-        <header class="section-head" data-reveal>
-          <span class="section-index">01</span>
-          <h2>About</h2>
-          <p class="section-kicker">Who I am, in a few tiles.</p>
-        </header>
-        <div class="bento" id="about-bento"></div>
+      <div class="rail"><span><i class="dot"></i>(About me)</span><span><i class="dot"></i>(12.9716° N, 77.5946° E)</span><span>©22–26</span></div>
+
+      <div class="about-panel" data-reveal>
+        <span class="ap-index">(01)</span>
+        <figure class="ap-card">
+          <img src="assets/images/avatar_55.png" alt="Rohan's collectible avatar" loading="lazy" />
+          <span class="cross tl" aria-hidden="true"></span><span class="cross br" aria-hidden="true"></span>
+        </figure>
+        <div class="ap-copy">
+          <p class="ap-text"><span class="ap-label">(About)</span><span class="lead" id="about-lead"></span> <span id="about-rest"></span></p>
+          <dl class="ap-stats" id="about-stats"></dl>
+        </div>
+      </div>
+
+      <h2 class="display big title-row" data-lines>
+        <span class="ln"><span>INTELLIGENT</span></span>
+        <span class="ln"><span>SYSTEMS</span></span>
+        <span class="ln"><span><b class="bar"></b>BLOCKS</span></span>
+        <span class="tr-num">/01</span>
+      </h2>
+
+      <div class="rail"><span><i class="dot"></i>©01</span><span><i class="dot"></i>(Introduction)</span><span>(About)</span></div>
+
+      <div class="quote-block">
+        <svg class="quote-mark" viewBox="0 0 140 120" aria-hidden="true">
+          <path d="M6 114V56C6 26 20 8 52 4v18C34 26 28 38 28 56h26v58zM82 114V56c0-30 14-48 46-52v18c-18 4-24 16-24 34h26v58z" />
+        </svg>
+        <div class="quote-paras" id="quote-paras"></div>
+      </div>
+      <div class="signature" data-reveal>
+        <span><i class="dot"></i>Rohan R</span>
+        <span id="sig-role"></span>
+        <span>(+91)</span>
       </div>
     </section>
 
     <!-- ============ EXPERIENCE ============ -->
-    <section id="experience" class="section section-alt">
-      <div class="container">
-        <header class="section-head" data-reveal>
-          <span class="section-index">02</span>
-          <h2>Experience</h2>
-          <p class="section-kicker">Shipping AI into production.</p>
-        </header>
-        <div class="timeline" id="experience-list">
-          <div class="timeline-rail" aria-hidden="true"><div class="timeline-fill" id="timeline-fill"></div></div>
-        </div>
-      </div>
+    <section id="experience" class="section">
+      <h2 class="display big title-row" data-lines>
+        <span class="ln"><span>HANDS-ON</span></span>
+        <span class="ln"><span><b class="bar"></b>WORK</span></span>
+        <span class="tr-num">/02</span>
+      </h2>
+      <div class="rail"><span><i class="dot"></i>©02</span><span><i class="dot"></i>(Where I've worked)</span><span>©2026</span></div>
+      <div class="xp-grid" id="experience-list"></div>
     </section>
 
     <!-- ============ PROJECTS ============ -->
     <section id="projects" class="section">
-      <div class="container">
-        <header class="section-head" data-reveal>
-          <span class="section-index">03</span>
-          <h2>Projects</h2>
-          <p class="section-kicker">Things I've designed, trained and shipped.</p>
-        </header>
-        <div class="filters" id="project-filters" role="tablist" aria-label="Filter projects" data-reveal></div>
-        <div class="project-grid" id="project-grid"></div>
-        <div class="center" data-reveal>
-          <button class="btn btn-ghost" id="projects-more" hidden>Show all projects</button>
-        </div>
+      <div class="crosshair" aria-hidden="true"></div>
+      <div class="pack-head">
+        <h2 class="pack-title">©003 Pack<br>– Project Squad</h2>
+        <div class="filters" id="project-filters" role="tablist" aria-label="Filter projects"></div>
+        <a href="#skills" class="round-btn" aria-label="Skip to toolkit">↓</a>
+      </div>
+      <div class="pack-grid" id="project-grid"></div>
+      <div class="center">
+        <button class="btn-arrow ghost" id="projects-more" hidden><span>Show all projects</span><i aria-hidden="true">+</i></button>
       </div>
     </section>
 
     <!-- ============ SKILLS ============ -->
-    <section id="skills" class="section section-alt">
-      <div class="container">
-        <header class="section-head" data-reveal>
-          <span class="section-index">04</span>
-          <h2>Skills</h2>
-          <p class="section-kicker">The stack I reach for.</p>
-        </header>
-        <div class="skills-grid" id="skills-grid"></div>
+    <section id="skills" class="section">
+      <div class="spec-head">
+        <span>©004</span><span>Toolkit</span><i class="dot end"></i>
       </div>
+      <p class="manifesto" data-reveal>
+        <span class="cross tl" aria-hidden="true"></span>
+        <span class="indent"></span>(A toolkit) that turns research ideas into systems people actually use, from
+        pixels to prompts.
+        <span class="m-year">©2026</span>
+      </p>
+      <div class="spec-list" id="skills-grid"></div>
     </section>
 
-    <!-- ============ EDUCATION & CERTS ============ -->
+    <!-- ============ EDUCATION ============ -->
     <section id="education" class="section">
-      <div class="container">
-        <header class="section-head" data-reveal>
-          <span class="section-index">05</span>
-          <h2>Education</h2>
-          <p class="section-kicker">Foundations and certifications.</p>
-        </header>
-        <div class="edu-layout">
-          <div class="edu-list" id="education-list"></div>
-          <aside class="certs card" data-reveal>
-            <h3 class="card-label">Certifications</h3>
-            <ul class="check-list" id="certs-list"></ul>
-            <h3 class="card-label" id="extra-label">Extracurricular</h3>
-            <ul class="check-list" id="extra-list"></ul>
-          </aside>
-        </div>
-      </div>
+      <div class="spec-head"><span>©005</span><span>Education</span><i class="dot end"></i></div>
+      <ol class="award-list" id="education-list"></ol>
+      <div class="spec-head"><span>©006</span><span>Certifications</span><i class="dot end"></i></div>
+      <ol class="award-list" id="certs-list"></ol>
     </section>
 
     <!-- ============ CONTACT ============ -->
-    <section id="contact" class="section contact">
-      <div class="container">
-        <header class="section-head" data-reveal>
-          <span class="section-index">06</span>
-          <h2>Contact</h2>
-        </header>
-        <p class="contact-title" data-reveal>Let's build something <span class="highlight">intelligent</span>.</p>
-        <p class="contact-sub" data-reveal>Internships, full-time roles, collaborations or just a good AI conversation. My
-          inbox is open.</p>
-        <div class="contact-grid" id="contact-grid"></div>
+    <section id="contact" class="contact">
+      <div class="contact-panel">
+        <div class="rail"><span><i class="dot"></i>©05</span><span><i class="dot"></i>(Contact)</span><span>©2026</span></div>
+        <div class="contact-grid">
+          <div class="contact-left">
+            <h2 class="display contact-title" data-lines>
+              <span class="ln"><span>LET'S BRING</span></span>
+              <span class="ln"><span>YOUR IDEAS</span></span>
+              <span class="ln"><span>TO REAL LIFE</span></span>
+            </h2>
+            <span class="cross" aria-hidden="true"></span>
+            <p class="contact-direct">
+              <a class="c-email" data-email></a><br>
+              <a class="c-phone" data-phone></a>
+            </p>
+            <form class="contact-form" id="contact-form">
+              <p class="cf-label"><i class="dot"></i>Let me know how I can help.</p>
+              <div class="cf-row">
+                <label><span class="sr">Name</span><input name="name" placeholder="NAME" required autocomplete="name" /></label>
+                <label><span class="sr">Email</span><input name="email" type="email" placeholder="E-MAIL" required autocomplete="email" /></label>
+              </div>
+              <label><span class="sr">Message</span><textarea name="message" rows="4" placeholder="MESSAGE" required></textarea></label>
+              <button class="btn-arrow" type="submit"><span>Send email</span><i aria-hidden="true">→</i></button>
+            </form>
+          </div>
+          <div class="contact-right">
+            <p class="coords">(+91 India)<br>12.9716° N, 77.5946° E</p>
+            <div class="pills"><span class="pill">+</span><span class="pill">Social media</span><span class="pill">&amp;</span><span class="pill">Studio address</span></div>
+            <div class="cr-block">
+              <p class="cr-label"><i class="dot"></i>(Follow me)</p>
+              <ul class="slash-list" id="follow-list"></ul>
+            </div>
+            <div class="cr-block cr-split">
+              <div><p class="cr-label"><i class="dot"></i>Visit</p><p>Bengaluru, Karnataka,<br>India.</p></div>
+              <div><p class="cr-label"><i class="dot"></i>Local time</p><p><span data-clock>--:--</span><br>IST (GMT +5:30)</p></div>
+            </div>
+          </div>
+        </div>
+        <footer class="site-footer">
+          <span>Designed &amp; built by Rohan R</span>
+          <a href="#top">Back to top ↑</a>
+          <span>© <span id="year"></span> Rohan R™. All rights reserved.</span>
+        </footer>
       </div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="container footer-row">
-      <span>© <span id="year"></span> <span id="footer-name">Rohan R</span>. Built by hand, no templates.</span>
-      <a href="#top" class="back-top">Back to top ↑</a>
-    </div>
-  </footer>
 
   <!-- Project modal -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-backdrop" data-close></div>
     <div class="modal-panel" id="modal-panel">
-      <button class="icon-btn modal-close" data-close aria-label="Close">✕</button>
+      <button class="menu-btn modal-close" data-close aria-label="Close"><span class="menu-label">Close ✕</span></button>
       <div id="modal-body"></div>
     </div>
   </div>
